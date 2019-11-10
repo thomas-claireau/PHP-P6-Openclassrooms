@@ -1,4 +1,4 @@
-# [PHP] - P7 Openclassrooms - Développez de A à Z le site communautaire SnowTricks
+# [PHP] - P6 Openclassrooms - Développez de A à Z le site communautaire SnowTricks
 
 ## Contexte
 

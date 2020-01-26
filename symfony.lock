@@ -497,6 +497,9 @@
     "symfony/var-dumper": {
         "version": "v4.1.12"
     },
+    "symfony/var-exporter": {
+        "version": "v4.2.12"
+    },
     "symfony/web-link": {
         "version": "v4.1.12"
     },

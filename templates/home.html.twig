@@ -1,0 +1,24 @@
+{% extends "base.html.twig" %}
+
+{% block title 'SnowTricks | Jimmy Sweat' %}
+{% block h1 'SnowTricks' %}
+{% block subtitle 'Redécouvrez la glisse avec Jimmy Sweat' %}
+
+{% block body %}
+
+<div id="figures" class="col text-center">
+    <h2>Les dernières figures</h2>
+    <div class="row flex">
+        <div class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-2 row-cols-1">
+            {% for figure in figures %}
+                <div class="col">
+                    {% include "figure/_figure.html.twig" %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <a href="#" class="btn btn-lg btn-primary mt-4">Charger plus de figures</a>
+</div>
+
+{% endblock body %}

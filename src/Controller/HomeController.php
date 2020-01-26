@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\FiguresRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,10 +14,13 @@ class HomeController extends AbstractController
      *
      * @return Response
      */
-    public function index(): Response
+    public function index(FiguresRepository $repository): Response
     {
-        return $this->render('./pages/home.html.twig', [
+        $figures = $repository->findAll();
+        dump($figures);
+        return $this->render('./home.html.twig', [
             'current_menu' => 'home',
+            'figures' => $figures
         ]);
     }
 }

@@ -3,5 +3,6 @@
   "build/app.js": "http://localhost:8080/build/app.js",
   "build/runtime.js": "http://localhost:8080/build/runtime.js",
   "build/vendors~app.js": "http://localhost:8080/build/vendors~app.js",
-  "build/images/home_image.jpg": "http://localhost:8080/build/images/home_image.jpg"
+  "build/images/home_image.jpg": "http://localhost:8080/build/images/home_image.jpg",
+  "build/images/empty.jpg": "http://localhost:8080/build/images/empty.jpg"
 }

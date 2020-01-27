@@ -30,31 +30,6 @@ class FigureController extends AbstractController
     }
 
     /**
-     * @Route("/biens", name="figure.index")
-     * @return Response
-     */
-    // public function index(Request $request, PaginatorInterface $paginator): Response
-    // {
-    //     // $search = new Search();
-    //     // $form = $this->createForm(SearchType::class, $search);
-    //     // $form->handleRequest($request);
-
-    //     $figuresQuery = $this->repository->findAllQuery();
-
-    //     $pagination = $paginator->paginate(
-    //         $figuresQuery, /* query NOT result */
-    //         $request->query->getInt('page', 1), /*page number*/
-    //         12 /*limit per page*/
-    //     );
-
-    //     return $this->render('figure/index.html.twig', [
-    //         'current_menu' => 'figure.index',
-    //         'pagination' => $pagination,
-    //         // 'form' => $form->createView(),
-    //     ]);
-    // }
-
-    /**
      * @Route("/figure/{slug}-{id}", name="figure.show", requirements={"slug": "[a-z0-9\-]*"})
      * @return Response
      * @param figure $figure
@@ -78,7 +53,7 @@ class FigureController extends AbstractController
         if ($slug === $figure->getSlug()) {
             return $this->render('figure/show.html.twig', [
                 'figure' => $figure,
-                'current_menu' => 'figure.index',
+                'current_menu' => 'figure.show',
                 // 'form' => $form->createView()
             ]);
         }

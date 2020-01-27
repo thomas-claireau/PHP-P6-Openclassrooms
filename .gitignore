@@ -1,5 +1,15 @@
 wireframes.pdf
 CDC.pdf
+
+# Files ignored
+composer.lock
+package-lock.json
+phpunit.xml.dist
+symfony.lock
+webpack.config.js
+config/bundles.php
+public/build/
+
 # Created by https://www.gitignore.io/api/node,symfony
 # Edit at https://www.gitignore.io/?templates=node,symfony
 

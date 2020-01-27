@@ -1,0 +1,29 @@
+.figure {
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+
+  p {
+    color: $mainColor;
+    text-decoration: none;
+  }
+
+  .card-title {
+    p {
+      color: $secondaryColor;
+    }
+  }
+
+  .card-img-top {
+    height: 300px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease-in-out;
+    text-decoration: none;
+  }
+}

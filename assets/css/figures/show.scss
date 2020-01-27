@@ -1,0 +1,34 @@
+.figure-show {
+  .figure-container {
+    margin-top: 150px;
+    .image {
+      width: 100%;
+      height: 480px;
+      background-size: cover;
+      background-position: center;
+    }
+    .medias {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+    }
+    .photos,
+    .videos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > div {
+        background-size: cover;
+        background-position: center;
+        height: 150px;
+        width: 150px;
+
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}

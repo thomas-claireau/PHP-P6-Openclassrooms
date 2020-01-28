@@ -16,8 +16,13 @@ class FiguresFixtures extends Fixture
         for ($i = 0; $i < 100; $i++) {
             $figure = new Figures();
 
+            $date = new \DateTime();
+
             $figure->setName($faker->words(4, true));
-            $figure->setDescription($faker->sentences(3, true));
+            $figure->setShortDescription($faker->sentences(3, true));
+            $figure->setCreatedAt($date);
+            $figure->setUpdatedAt($date);
+            $figure->setDescription($faker->sentences(10, true));
             $manager->persist($figure);
         }
 

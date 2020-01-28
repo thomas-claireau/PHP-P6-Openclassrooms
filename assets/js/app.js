@@ -15,7 +15,7 @@ import $ from 'jquery';
 import './figure/figure.js';
 
 // Add smooth scrolling on all links inside the navbar
-$('.scroll').on('click', function(event) {
+$('.scroll').on('click', function (event) {
 	// Make sure this.hash has a value before overriding default behavior
 	if (this.hash !== '') {
 		// Prevent default anchor click behavior
@@ -31,7 +31,7 @@ $('.scroll').on('click', function(event) {
 				scrollTop: $(hash).offset().top - 100,
 			},
 			800,
-			function() {
+			function () {
 				// Add hash (#) to URL when done scrolling (default click behavior)
 				window.location.hash = hash;
 			}

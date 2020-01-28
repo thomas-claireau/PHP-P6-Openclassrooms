@@ -7,14 +7,27 @@
 {% block body %}
 
 	<div class="figure-container col text-center container">
-		<div class="image" style="background-image: url({{asset('build/images/home_image.jpg')}});"></div>
+		<div class="image" style="background-image: url({{asset('build/images/home_image.jpg')}});">
+			<h1>
+				{{figure.name}}
+			</h1>
+		</div>
 		<div class="medias">
 			<div class="photos">
 				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
 				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
 				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
 			</div>
-			<div class="videos"></div>
+			<div class="videos">
+				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+			</div>
+		</div>
+		<div class="row text">
+			<div class="col text-left">
+				{{ figure.description }}
+			</div>
 		</div>
 	</div>
 

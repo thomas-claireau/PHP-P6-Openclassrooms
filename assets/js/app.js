@@ -12,6 +12,8 @@ import 'bootstrap';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
 
+import './figure/figure.js';
+
 // Add smooth scrolling on all links inside the navbar
 $('.scroll').on('click', function(event) {
 	// Make sure this.hash has a value before overriding default behavior

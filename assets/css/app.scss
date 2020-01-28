@@ -1,32 +1,42 @@
-@import "~bootstrap/scss/bootstrap";
-@import "vars";
-@import "scroll";
+@import '~bootstrap/scss/bootstrap';
+@import 'vars';
+@import 'scroll';
 
-@import "./header.scss";
-@import "./figures/figure.scss";
-@import "./figures/show.scss";
+@import './header.scss';
+@import './figures/figure.scss';
+@import './figures/show.scss';
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 h1 {
-  font-size: 3.5rem;
+	font-size: 3.5rem;
 
-  @media screen and (max-width: $break-tablet) {
-    font-size: 2.5rem;
-  }
+	@media screen and (max-width: $break-tablet) {
+		font-size: 2.5rem;
+	}
 }
 
 .lead {
-  font-size: 1.75rem;
+	font-size: 1.75rem;
 
-  @media screen and (max-width: $break-tablet) {
-    font-size: 1.25rem;
-  }
+	@media screen and (max-width: $break-tablet) {
+		font-size: 1.25rem;
+	}
 }
 
 .row {
-  margin-right: 0;
-  margin-left: 0;
+	margin-right: 0;
+	margin-left: 0;
+}
+
+@media (min-width: 1200px) {
+	.container,
+	.container-sm,
+	.container-md,
+	.container-lg,
+	.container-xl {
+		max-width: 1360px;
+	}
 }

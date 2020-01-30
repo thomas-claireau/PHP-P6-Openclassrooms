@@ -12,16 +12,21 @@
 				{{figure.name}}
 			</h1>
 		</div>
-		<div class="medias">
-			<div class="photos">
-				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-			</div>
-			<div class="videos">
-				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-				<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+		<a class="btn btn-primary media-mobile" data-toggle="collapse" href="#mediaCollapse" role="button" aria-expanded="false" aria-controls="mediaCollapse">
+			Voir les médias
+		</a>
+		<div class="collapse" id="mediaCollapse">
+			<div class="medias">
+				<div class="photos">
+					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+				</div>
+				<div class="videos">
+					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+				</div>
 			</div>
 		</div>
 		<div class="row text">
@@ -29,6 +34,22 @@
 				{{ figure.description }}
 			</div>
 		</div>
+		<div class="btn-toolbar infos justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
+			<div class="btn-group mr-2" role="group" aria-label="First group">
+				<a href="#" class="btn btn-primary">Créée le
+					{{ figure.createdAt|date("d/m/Y") }}</a>
+			</div>
+			<div class="btn-group mr-2" role="group" aria-label="Second group">
+				<a href="#" class="btn btn-primary">Groupe</a>
+			</div>
+			{% if date_is_same %}
+				<div class="btn-group" role="group" aria-label="Third group">
+					<a href="#" class="btn btn-primary">Modifiée le
+						{{ figure.updatedAt|date("d/m/Y") }}</a>
+				</div>
+			{% endif %}
+		</div>
+		{% include "comment.twig" %}
 	</div>
 
 {% endblock body %}

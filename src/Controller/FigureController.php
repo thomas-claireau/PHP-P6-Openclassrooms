@@ -53,7 +53,8 @@ class FigureController extends AbstractController
         if ($slug === $figure->getSlug()) {
             return $this->render('figure/show.html.twig', [
                 'figure' => $figure,
-                'current_menu' => 'figure.show',
+				'current_menu' => 'figure.show',
+				'date_is_same' => $figure->dateIsSame(),
                 // 'form' => $form->createView()
             ]);
         }

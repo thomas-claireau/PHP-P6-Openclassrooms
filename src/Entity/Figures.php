@@ -35,7 +35,7 @@ class Figures
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updated_at;
+	private $updated_at;
 
     /**
      * @ORM\Column(type="string", length=400)
@@ -99,7 +99,11 @@ class Figures
         $this->updated_at = $updated_at;
 
         return $this;
-    }
+	}
+	
+	public function dateIsSame() {
+		return $this->created_at == $this->updated_at;
+	}
 
     public function getShortDescription(): ?string
     {

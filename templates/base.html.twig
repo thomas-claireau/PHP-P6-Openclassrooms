@@ -15,22 +15,19 @@
 		{% endblock %}
 	</head>
 
-	{% if current_menu is defined %}
-		{% set class = current_menu|replace({'.': '-'}) %}
-	{% endif %}
+	<body class="{{ current_menu is defined ? current_menu|replace({'.': '-'}) : '' }}" data-spy="scroll" data-target=".header" data-offset="-50"></body>
 
-	<body class="{{ class }}" data-spy="scroll" data-target=".header" data-offset="-50">
-		{% include "navbar.html.twig" %}
-		{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
+	{% include "navbar.html.twig" %}
+	{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
 
-		<section class="py-5">
-			<div class="container{% if current_menu == " home" %}-fluid{% endif %}"> {% block body %}{% endblock %}
-				</div>
-			</section>
+	<section class="py-5">
+		<div class="container{% if current_menu is defined and current_menu == " home" %}-fluid{% endif %}"> {% block body %}{% endblock %}
 
-			{% block javascripts %}
-			{% endblock %}
-			{{ encore_entry_script_tags('app') }}
-		</body>
+			</div>
+		</section>
 
+		{% block javascripts %}
+		{% endblock %}
+		{{ encore_entry_script_tags('app') }}
 	</html>
+</body></html>

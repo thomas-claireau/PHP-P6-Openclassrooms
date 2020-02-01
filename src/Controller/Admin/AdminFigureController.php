@@ -52,6 +52,10 @@ class AdminFigureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new \DateTime();
+            $figure->setCreatedAt($date);
+            $figure->setUpdatedAt($date);
+
             $this->em->persist($figure);
             $this->em->flush();
             $this->addFlash('success', 'La figure a bien été créée');
@@ -77,6 +81,9 @@ class AdminFigureController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new \DateTime();
+            $figure->setUpdatedAt($date);
+            
             $this->em->flush();
             $this->addFlash('success', 'La figure a bien été modifiée');
             return $this->redirectToRoute('admin.figure.index');

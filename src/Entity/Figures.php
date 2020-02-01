@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FiguresRepository")
+ * @UniqueEntity("name")
  */
 class Figures
 {
@@ -38,6 +41,7 @@ class Figures
 	private $updated_at;
 
     /**
+     * @Assert\Length(min=5, max=150)
      * @ORM\Column(type="string", length=400)
      */
     private $short_description;

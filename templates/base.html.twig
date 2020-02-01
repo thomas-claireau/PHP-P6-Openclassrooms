@@ -15,13 +15,13 @@
 		{% endblock %}
 	</head>
 
-	<body class="{{ current_menu is defined ? current_menu|replace({'.': '-'}) : '' }}" data-spy="scroll" data-target=".header" data-offset="-50"></body>
+	<body class="{{ current_menu is defined ? current_menu|replace({'.': '-'}) : '' }} {{ app.user ? 'admin' : '' }}" data-spy="scroll" data-target=".header" data-offset="-50"></body>
 
 	{% include "navbar.html.twig" %}
 	{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
 
 	<section class="py-5">
-		<div class="container{% if current_menu is defined and current_menu == " home" %}-fluid{% endif %}"> {% block body %}{% endblock %}
+		<div class="container{% if current_menu is defined and current_menu == 'home' %}-fluid{% endif %} "> {% block body %}{% endblock %}
 
 			</div>
 		</section>

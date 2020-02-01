@@ -31,6 +31,12 @@ class Comment
      */
     private $created_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Figures", inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $figure;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -68,6 +74,18 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getFigure(): ?Figures
+    {
+        return $this->figure;
+    }
+
+    public function setFigure(?Figures $figure): self
+    {
+        $this->figure = $figure;
 
         return $this;
     }

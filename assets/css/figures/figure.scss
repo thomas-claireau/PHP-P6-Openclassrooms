@@ -1,7 +1,7 @@
 .figure {
-  transform: scale(1);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
+  h5 {
+    margin: 0;
+  }
 
   p {
     color: $mainColor;
@@ -11,6 +11,7 @@
   .card-title {
     p {
       color: $secondaryColor;
+      margin: 0;
     }
   }
 
@@ -20,10 +21,60 @@
     background-size: cover;
     background-position: center;
   }
+}
 
-  &:hover {
-    transform: scale(1.03);
+body:not(.admin) {
+  .figure {
+    transform: scale(1);
     transition: all 0.3s ease-in-out;
-    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+      transform: scale(1.03);
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+    }
+  }
+}
+
+.admin {
+  .figure {
+    h5 {
+      text-align: left;
+    }
+
+    .card-body {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      .btn-link {
+        padding: 0 0 0 18px;
+      }
+
+      a,
+      button {
+        color: $grisFonce;
+        font-size: 20px;
+      }
+
+      a {
+        &:hover {
+          color: $secondaryColor;
+        }
+      }
+
+      button {
+        &:hover {
+          color: $red;
+        }
+      }
+    }
   }
 }

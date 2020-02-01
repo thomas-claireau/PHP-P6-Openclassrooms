@@ -67,7 +67,7 @@ class FiguresRepository extends ServiceEntityRepository
     private function getQueryDesc()
     {
         return $this->createQueryBuilder('p')
-            ->orderBy('p.id', 'DESC')
-            ->where('p.id <= 15');
+            ->orderBy('p.updated_at', 'DESC')
+            ->setMaxResults(15);
     }
 }

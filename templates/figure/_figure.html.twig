@@ -1,0 +1,15 @@
+<a href="{{ path('figure.show', { id: figure.id, slug: figure.slug }) }}" class="card mt-4 figure">
+
+	<div class="card-img-top" style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+
+	<div class="card-body">
+		<h5 class="card-title">
+			<p>
+				{{ figure.name }}
+			</p>
+		</h5>
+		<p class="card-text">
+			{{ figure.shortDescription}}
+		</p>
+	</div>
+</a>

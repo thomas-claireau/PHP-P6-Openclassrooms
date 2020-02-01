@@ -107,7 +107,7 @@ class AdminFigureController extends AbstractController
             $this->em->flush();
             $this->addFlash('success', 'La figure a bien été supprimée');
         }
-        return $this->redirectToRoute('admin.figure.index');
+        return $this->redirectToRoute('home');
     }
 
 }

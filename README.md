@@ -1,5 +1,9 @@
 # [PHP] - P6 Openclassrooms - Développez de A à Z le site communautaire SnowTricks
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/38908a1ea0204cd39996400db31ba8eb)](https://www.codacy.com/manual/thomas-claireau/PHP-P6-Openclassrooms?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thomas-claireau/PHP-P6-Openclassrooms&amp;utm_campaign=Badge_Grade)
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/56882df21a146f2e28bf/maintainability)](https://codeclimate.com/github/thomas-claireau/PHP-P6-Openclassrooms/maintainability)
+
 ## Contexte
 
 Jimmy Sweat est un entrepreneur ambitieux passionné de snowboard. Son objectif est la création d'un site collaboratif pour faire connaitre ce sport auprès du grand public et aider à l'apprentissage des figures (tricks).

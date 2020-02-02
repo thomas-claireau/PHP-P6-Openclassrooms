@@ -11,6 +11,8 @@ import 'bootstrap';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 import $ from 'jquery';
+import 'select2';
+import 'select2/dist/css/select2.css';
 
 import './figure/figure.js';
 
@@ -39,4 +41,6 @@ $('.scroll').on('click', function (event) {
 	} // End if
 });
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+$(document).ready(function () {
+	$('select').select2();
+});

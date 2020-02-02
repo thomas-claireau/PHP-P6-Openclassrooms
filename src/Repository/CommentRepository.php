@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Comment;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,23 @@ class CommentRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Comment::class);
+    }
+
+        /**
+     * @return Comment[]
+     */
+    public function findAll(): array
+    {
+        return $this->getQueryDesc()
+            ->getQuery()
+            ->getResult();
+    }
+
+    private function getQueryDesc()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.created_at', 'DESC')
+            ->setMaxResults(5);
     }
 
     // /**

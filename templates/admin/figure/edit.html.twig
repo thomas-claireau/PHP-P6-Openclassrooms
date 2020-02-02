@@ -28,8 +28,15 @@
 				</div>
 			</div>
 		</div>
-		<div class="container mt-4">
+		<div class="container mt-4 form-container">
 			{{ include('admin/figure/_form.html.twig', {button: 'Modifier'}) }}
+			<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+				<button class="btn btn-danger delete">
+					Supprimer
+				</button>
+			</form>
 		</div>
 	</div>
 

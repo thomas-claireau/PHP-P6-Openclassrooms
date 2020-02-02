@@ -9,8 +9,16 @@
 		{{ form_row(form.description) }}
 	</div>
 </div>
+<div class="row">
+	<div class="categories">
+		{{ form_row(form.categories) }}
+	</div>
+</div>
+
 {{ form_rest(form) }}
-<button class="btn btn-primary">
-	{{ button|default('Enregistrer') }}
-</button>
+<div class="actions-form text-right">
+	<button class="btn btn-primary edit">
+		{{ button|default('Enregistrer') }}
+	</button>
+</div>
 {{ form_end(form) }}

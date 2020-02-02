@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title 'Se connecter' %}
-{% block h1 'Se connecter' %}
-{% block subtitle 'Snow Tricks' %}
 
 {% block body %}
-	<div class="container mt-4">
-
+	<div class="container container-form mt-4 text-center">
+		<h1>
+			Se connecter
+		</h1>
 		{% if error %}
 			<div class="alert alert-danger">
 				{{ error.messageKey | trans(error.messagedata, 'security') }}
@@ -28,10 +28,18 @@
 				<input type="password" id="password" name="_password" class="form-control">
 			</div>
 
-			<button type="submit" class="btn btn-primary">
-				Se connecter
-			</button>
-		</form>
+			<div class="actions">
+				<a href="#" class="btn btn-link register">
+					S'inscrire
+				</a>
+				<a href="#" class="btn btn-link forgot-password">
+					Mot de passe oublié ?
+				</a>
+				<button type="submit" class="btn btn-primary">
+					Se connecter
+				</button>
+			</div>
 
+		</form>
 	</div>
 {% endblock %}

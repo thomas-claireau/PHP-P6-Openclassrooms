@@ -7,6 +7,21 @@
 {% block body %}
 
 	<div class="figure-container col text-center container">
+		{% if app.user %}
+			<div class="actions">
+				<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</a>
+				<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+					<button class="btn btn-link delete">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</form>
+			</div>
+		{% endif %}
+
 		<div class="image" style="background-image: url({{asset('build/images/home_image.jpg')}});">
 			<h1>
 				{{figure.name}}
@@ -36,20 +51,60 @@
 		</div>
 		<div class="btn-toolbar infos justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
 			<div class="btn-group mr-2" role="group" aria-label="First group">
-				<a href="#" class="btn btn-primary">Créée le
-					{{ figure.createdAt|date("d/m/Y") }}</a>
+				<a href="#" class="btn btn-info">
+					Créée le
+					{{ figure.createdAt|date("d/m/Y") }}
+				</a>
 			</div>
 			<div class="btn-group mr-2" role="group" aria-label="Second group">
-				<a href="#" class="btn btn-primary">Groupe</a>
+				<a href="#" class="btn btn-info">
+					Groupe
+				</a>
 			</div>
 			{% if date_is_same %}
 				<div class="btn-group" role="group" aria-label="Third group">
-					<a href="#" class="btn btn-primary">Modifiée le
-						{{ figure.updatedAt|date("d/m/Y") }}</a>
+					<a href="#" class="btn btn-info">
+						Modifiée le
+						{{ figure.updatedAt|date("d/m/Y") }}
+					</a>
 				</div>
 			{% endif %}
 		</div>
-		{% include "comment.twig" %}
+		<div class="comments-container">
+			<h2>
+				Commentaires
+			</h2>
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			{% if app.user and form is defined %}
+
+
+				{{ form_start(form) }}
+
+				<div class="row">
+					<div class="col">
+						{{ form_row(form.content) }}
+					</div>
+				</div>
+
+				<button class="btn btn-primary">
+					{{ button|default('Ajouter un commentaire') }}
+				</button>
+
+				{{ form_end(form) }}
+
+			{% endif %}
+
+			{% if comments is defined %}
+				{% for comment in comments %}
+					{% include "comment.twig" with {'comment': comment} %}
+				{% endfor %}
+			{% endif %}
+		</div>
 	</div>
 
 {% endblock body %}

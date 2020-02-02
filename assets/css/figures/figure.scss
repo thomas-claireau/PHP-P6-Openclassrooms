@@ -1,4 +1,7 @@
 .figure {
+  transform: scale(1);
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
   h5 {
     margin: 0;
   }
@@ -21,19 +24,11 @@
     background-size: cover;
     background-position: center;
   }
-}
 
-body:not(.admin) {
-  .figure {
-    transform: scale(1);
+  &:hover {
+    transform: scale(1.03);
     transition: all 0.3s ease-in-out;
-    cursor: pointer;
-
-    &:hover {
-      transform: scale(1.03);
-      transition: all 0.3s ease-in-out;
-      text-decoration: none;
-    }
+    text-decoration: none;
   }
 }
 
@@ -58,21 +53,19 @@ body:not(.admin) {
         padding: 0 0 0 18px;
       }
 
-      a,
       button {
         color: $grisFonce;
         font-size: 20px;
-      }
 
-      a {
-        &:hover {
-          color: $secondaryColor;
+        &.edit {
+          &:hover {
+            color: $secondaryColor;
+          }
         }
-      }
-
-      button {
-        &:hover {
-          color: $red;
+        &.delete {
+          &:hover {
+            color: $red;
+          }
         }
       }
     }

@@ -17,7 +17,6 @@ class HomeController extends AbstractController
     public function index(FiguresRepository $repository): Response
     {
         $figures = $repository->findAll();
-        dump($figures);
         return $this->render('./home.html.twig', [
             'current_menu' => 'home',
             'figures' => $figures

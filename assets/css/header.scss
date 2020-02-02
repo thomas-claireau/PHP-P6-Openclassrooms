@@ -1,9 +1,13 @@
-.figure-show .masthead {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  filter: blur(20px);
+.figure-show,
+.admin-figure-edit,
+.admin-figure-new {
+  .masthead {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    filter: blur(20px);
+  }
 }
 
 .masthead {

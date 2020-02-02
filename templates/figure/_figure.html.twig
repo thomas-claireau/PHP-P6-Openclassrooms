@@ -1,41 +1,29 @@
-{% if app.user %}
-
-	<div class="card mt-4 figure admin">
-		<div class="card-img-top" style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-		<div class="card-body">
-			<h5 class="card-title">
-				<p>
-					{{ figure.name }}
-				</p>
-			</h5>
-			{% if app.user %}
-				<div class="actions">
-					<a href="{{ path('admin.figure.edit', {id: figure.id}) }}">
+<a href="{{ path('figure.show', { id: figure.id, slug: figure.slug }) }}" class="card mt-4 figure">
+	<div class="card-img-top" style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+	<div class="card-body">
+		<h5 class="card-title">
+			<p>
+				{{ figure.name }}
+			</p>
+		</h5>
+		{% if app.user %}
+			<div class="actions">
+				<form action="{{ path('admin.figure.edit', {id: figure.id}) }}" style="display: inline-block">
+					<button class="btn btn-link edit">
 						<i class="fa fa-pencil" aria-hidden="true"></i>
-					</a>
-					<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
-						<input type="hidden" name="_method" value="DELETE">
-						<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
-						<button class="btn btn-link">
-							<i class="fa fa-trash" aria-hidden="true"></i>
-						</button>
-					</form>
-				</div>
-			{% endif %}
-		</div>
+					</button>
+				</form>
+				<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+					<button class="btn btn-link delete">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</form>
+			</div>
+		{% endif %}
+
 	</div>
+</a>
 
-{% else %}
-
-	<a href="{{ path('figure.show', { id: figure.id, slug: figure.slug }) }}" class="card mt-4 figure">
-		<div class="card-img-top" style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-		<div class="card-body">
-			<h5 class="card-title">
-				<p>
-					{{ figure.name }}
-				</p>
-			</h5>
-		</div>
-	</a>
-
-{% endif %}
+{# {% endif %} #}

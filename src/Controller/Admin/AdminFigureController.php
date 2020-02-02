@@ -30,19 +30,6 @@ class AdminFigureController extends AbstractController
     }
 
     /**
-     * @Route("/admin", name="admin.figure.index")
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function index()
-    {
-        $figures = $this->repository->findAll();
-        return $this->render('admin/figure/index.html.twig', [
-            'figures' => $figures,
-            'current_menu' => 'admin.figure.index',
-        ]);
-    }
-
-    /**
      * @Route("/admin/figure/create", name="admin.figure.new")
      */
     public function new(Request $request)
@@ -59,7 +46,7 @@ class AdminFigureController extends AbstractController
             $this->em->persist($figure);
             $this->em->flush();
             $this->addFlash('success', 'La figure a bien été créée');
-            return $this->redirectToRoute('admin.figure.index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('admin/figure/new.html.twig', [
@@ -86,7 +73,7 @@ class AdminFigureController extends AbstractController
             
             $this->em->flush();
             $this->addFlash('success', 'La figure a bien été modifiée');
-            return $this->redirectToRoute('admin.figure.index');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('admin/figure/edit.html.twig', [

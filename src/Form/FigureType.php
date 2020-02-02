@@ -14,7 +14,6 @@ class FigureType extends AbstractType
         $builder
             ->add('name')
             ->add('description')
-            ->add('short_description')
         ;
     }
 

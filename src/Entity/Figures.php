@@ -53,9 +53,15 @@ class Figures
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="figures")
+     */
+    private $categories;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
         public function __toString()
@@ -123,8 +129,8 @@ class Figures
 	}
 	
 	public function dateIsSame() {
-                        		return $this->created_at == $this->updated_at;
-                        	}
+                                       		return $this->created_at == $this->updated_at;
+                                       	}
 
     public function getShortDescription(): ?string
     {
@@ -164,6 +170,34 @@ class Figures
             if ($comment->getFigure() === $this) {
                 $comment->setFigure(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+            $category->addFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+            $category->removeFigure($this);
         }
 
         return $this;

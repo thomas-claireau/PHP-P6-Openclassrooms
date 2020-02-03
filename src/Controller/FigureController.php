@@ -15,68 +15,68 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FigureController extends AbstractController
 {
-    /**
-     * @var CommentRepository
-     */
-    private $repository;
+	/**
+	 * @var CommentRepository
+	 */
+	private $repository;
 
-    /**
-     * @var ObjectManager
-     */
-    private $em;
+	/**
+	 * @var ObjectManager
+	 */
+	private $em;
 
-    public function __construct(CommentRepository $repository, ObjectManager $em)
-    {
-        $this->repository = $repository;
-        $this->em = $em;
-    }
+	public function __construct(CommentRepository $repository, ObjectManager $em)
+	{
+		$this->repository = $repository;
+		$this->em = $em;
+	}
 
-    /**
-     * @Route("/figure/{slug}-{id}", name="figure.show", requirements={"slug": "[a-z0-9\-]*"})
-     * @return Response
-     * @param figure $figure
-     */
-    public function show(Figures $figure, string $slug, Request $request): Response
-    {
-        $user = $this->getUser();
-        $comments = $this->repository->findAll();
-        
-        if ($user) {
-            $comment = new Comment();
-            $form = $this->createForm(CommentType::class, $comment);
-            $form->handleRequest($request);
+	/**
+	 * @Route("/figure/{slug}-{id}", name="figure.show", requirements={"slug": "[a-z0-9\-]*"})
+	 * @return Response
+	 * @param figure $figure
+	 */
+	public function show(Figures $figure, string $slug, Request $request): Response
+	{
+		$user = $this->getUser();
+		$comments = $this->repository->findAll();
 
-            if ($form->isSubmitted() && $form->isValid()) {
-                $date = new \DateTime();
-                $comment->setCreatedAt($date);
-                $comment->setFigure($figure);
-                $comment->setUser($user);
+		if ($user) {
+			$comment = new Comment();
+			$form = $this->createForm(CommentType::class, $comment);
+			$form->handleRequest($request);
 
-                $this->em->persist($comment);
-                $this->em->flush();
-                $this->addFlash('success', 'Le commentaire a bien été rajouté');
+			if ($form->isSubmitted() && $form->isValid()) {
+				$date = new \DateTime();
+				$comment->setCreatedAt($date);
+				$comment->setFigure($figure);
+				$comment->setUser($user);
 
-                return $this->redirectToRoute('figure.show', [
-                    'id' => $figure->getId(),
-                    'slug' => $figure->getSlug()
-                ], 301);
-            }
-        }
+				$this->em->persist($comment);
+				$this->em->flush();
+				$this->addFlash('success', 'Le commentaire a bien été rajouté');
+
+				return $this->redirectToRoute('figure.show', [
+					'id' => $figure->getId(),
+					'slug' => $figure->getSlug()
+				], 301);
+			}
+		}
 
 
-        if ($slug === $figure->getSlug()) {
-            return $this->render('figure/show.html.twig', [
-                'figure' => $figure,
+		if ($slug === $figure->getSlug()) {
+			return $this->render('figure/show.html.twig', [
+				'figure' => $figure,
 				'current_menu' => 'figure.show',
-                'date_is_same' => $figure->dateIsSame(),
-                'comments' => $comments,
-                'form' => isset($form) && $form ? $form->createView() : false,
-            ]);
-        }
+				'date_is_same' => $figure->dateIsSame(),
+				'comments' => $comments,
+				'form' => isset($form) && $form ? $form->createView() : false,
+			]);
+		}
 
-        return $this->render('figure/show.html.twig', [
-            'id' => $figure->getId(),
-            'slug' => $figure->getSlug()
-        ], 301);
-    }
+		return $this->render('figure/show.html.twig', [
+			'id' => $figure->getId(),
+			'slug' => $figure->getSlug()
+		]);
+	}
 }

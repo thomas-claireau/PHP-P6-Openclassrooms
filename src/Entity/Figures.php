@@ -3,9 +3,9 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -41,12 +41,6 @@ class Figures
      * @ORM\Column(type="datetime")
      */
 	private $updated_at;
-
-    /**
-     * @Assert\Length(min=5, max=150)
-     * @ORM\Column(type="string", length=400)
-     */
-    private $short_description;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="figure")
@@ -129,20 +123,8 @@ class Figures
 	}
 	
 	public function dateIsSame() {
-                                       		return $this->created_at == $this->updated_at;
-                                       	}
-
-    public function getShortDescription(): ?string
-    {
-        return $this->short_description;
-    }
-
-    public function setShortDescription(string $short_description): self
-    {
-        $this->short_description = $short_description;
-
-        return $this;
-    }
+		return $this->created_at == $this->updated_at;
+	}
 
     /**
      * @return Collection|Comment[]

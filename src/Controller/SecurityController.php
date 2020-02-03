@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\User;
@@ -10,48 +11,53 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\User\UserCheckerInterface;
 
-class SecurityController extends AbstractController {
+class SecurityController extends AbstractController
+{
 
 	/**
-     * @var UserRepository
-     */
-    private $repository;
+	 * @var UserRepository
+	 */
+	private $repository;
 
-    /**
-     * @var ObjectManager
-     */
+	/**
+	 * @var ObjectManager
+	 */
 	private $em;
-	
-	/**
-     * @var UserPasswordEncoderInterface
-     */
-    private $encoder;
 
-    public function __construct(UserRepository $repository, ObjectManager $em, UserPasswordEncoderInterface $encoder)
-    {
-        $this->repository = $repository;
+	/**
+	 * @var UserPasswordEncoderInterface
+	 */
+	private $encoder;
+
+	public function __construct(UserRepository $repository, ObjectManager $em, UserPasswordEncoderInterface $encoder)
+	{
+		$this->repository = $repository;
 		$this->em = $em;
 		$this->encoder = $encoder;
-    }
-
-    /**
-     * @Route("/login", name="login")
-     */
-    public function login (AuthenticationUtils $authenticationUtils) {
-        $error = $authenticationUtils->getLastAuthenticationError();
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        return $this->render('security/login.html.twig', [
-            'error' => $error,
-            'current_menu' => 'login'
-        ]);
 	}
-	
+
+	/**
+	 * @Route("/login", name="login")
+	 */
+	public function login(AuthenticationUtils $authenticationUtils)
+	{
+		$error = $authenticationUtils->getLastAuthenticationError();
+		$lastUsername = $authenticationUtils->getLastUsername();
+
+
+		return $this->render('security/login.html.twig', [
+			'error' => $error,
+			'current_menu' => 'login'
+		]);
+	}
+
 	/**
 	 * @Route("/register", name="register")
 	 */
-	public function register(Request $request) {
+	public function register(Request $request)
+	{
 		$user = new User();
 		$form = $this->createForm(UserType::class, $user);
 		$form->handleRequest($request);
@@ -75,5 +81,4 @@ class SecurityController extends AbstractController {
 			'form' => $form->createView(),
 		]);
 	}
-
 }

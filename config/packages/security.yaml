@@ -18,9 +18,11 @@ security:
             form_login:
                 check_path: login
 
+            pattern: ^/
+            user_checker: App\Controller\Security\UserChecker
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
-
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 

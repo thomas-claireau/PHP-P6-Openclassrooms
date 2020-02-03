@@ -56,11 +56,17 @@ class SecurityController extends AbstractController {
 		$form = $this->createForm(UserType::class, $user);
 		$form->handleRequest($request);
 
+		$random = random_bytes(10);
+		dump($random);
+
 		if ($form->isSubmitted() && $form->isValid()) {
 			$user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
 			$this->em->persist($user);
 			$this->em->flush();
 			$this->addFlash('success', 'Votre inscription a été acceptée. Vous avez reçu un mail de confirmation à l\'adresse que vous nous avez indiqué.');
+
+			// envoi mail
+
 			return $this->redirectToRoute('home');
 		}
 

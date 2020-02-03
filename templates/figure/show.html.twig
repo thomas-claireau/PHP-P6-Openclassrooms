@@ -50,19 +50,21 @@
 			</div>
 		</div>
 		<div class="btn-toolbar infos justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
-			<div class="btn-group mr-2" role="group" aria-label="First group">
+			<div class="btn-group mr-2" role="group">
 				<a href="#" class="btn btn-info">
 					Créée le
 					{{ figure.createdAt|date("d/m/Y") }}
 				</a>
 			</div>
-			<div class="btn-group mr-2" role="group" aria-label="Second group">
-				<a href="#" class="btn btn-info">
-					Groupe
-				</a>
-			</div>
-			{% if date_is_same %}
-				<div class="btn-group" role="group" aria-label="Third group">
+			{% for category in figure.categories %}
+				<div class="btn-group mr-2" role="group">
+					<a href="#" class="btn btn-info">
+						{{category.name}}
+					</a>
+				</div>
+			{% endfor %}
+			{% if not date_is_same %}
+				<div class="btn-group" role="group">
 					<a href="#" class="btn btn-info">
 						Modifiée le
 						{{ figure.updatedAt|date("d/m/Y") }}

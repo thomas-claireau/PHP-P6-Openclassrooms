@@ -47,6 +47,16 @@ class User implements UserInterface,\Serializable
      */
     private $email;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $actif;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $token;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -203,5 +213,29 @@ class User implements UserInterface,\Serializable
             $this->email,
             $this->password
             ) = unserialize($serialized, ['allowed_classes' => false]);
+    }
+
+    public function getActif(): ?bool
+    {
+        return $this->actif;
+    }
+
+    public function setActif(bool $actif): self
+    {
+        $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
     }
 }

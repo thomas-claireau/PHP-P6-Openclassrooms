@@ -30,9 +30,12 @@
 				{{ form_row(form.password) }}
 			</div>
 		</div>
-		<button class="btn btn-primary">
-			{{ button|default('Créer mon compte') }}
-		</button>
+		<div class="actions">
+			<button class="btn btn-primary">
+				{{ button|default('Créer mon compte') }}
+			</button>
+			<a href="{{ path('login') }}">Vous avez déja un compte ?</a>
+		</div>
 		{{ form_end(form) }}
 	</div>
 {% endblock %}

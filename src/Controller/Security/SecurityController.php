@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Security;
 
 use App\Entity\User;
 use Twig\Environment;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use App\Form\ForgotPasswordUserType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
@@ -108,5 +109,17 @@ class SecurityController extends AbstractController
 			'current_menu' => 'register',
 			'form' => $form->createView(),
 		]);
+	}
+
+	/**
+	 * @Route("/forgot-password", name="forgot.password")
+	 */
+	public function forgotPassword(Request $request) {
+		$user = new User();
+		$form = $this->createForm(ForgotPasswordUserType::class, $user);
+		echo '<pre>';
+		var_dump("passe");
+		echo '</pre>';
+		exit;
 	}
 }

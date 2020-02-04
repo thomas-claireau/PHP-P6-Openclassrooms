@@ -110,4 +110,49 @@ class SecurityController extends AbstractController
 			'form' => $form->createView(),
 		]);
 	}
+
+	/**
+	 * @Route("/forgot-password", name="forgot.password")
+	 */
+	public function forgotPassword(Request $request)
+	{
+		$user = new User();
+		$form = $this->createForm(ForgotPasswordUserType::class, $user);
+		$form->handleRequest($request);
+
+		if ($form->isSubmitted() && $form->isValid()) {
+			$token = bin2hex(random_bytes(32));
+			$email = $user->getEmail();
+
+			$userExist = $this->getDoctrine()
+				->getRepository(User::class)
+				->findBy(array('email' => $email));
+
+			$userExist = $userExist[0];
+
+			if ($userExist) {
+				$userExist->setToken($token);
+				$this->em->persist($userExist);
+				$this->em->flush();
+
+				// envoi mail
+				$message = (new \Swift_Message('Réinitialisation de votre mot de passe'))
+					->setFrom('no-reply@snow-tricks.com')
+					->setTo($userExist->getEmail())
+					->setBody($this->renderer->render('emails/reset-password.html.twig', [
+						'user' => $userExist,
+					]), 'text/html');
+
+				$this->mailer->send($message);
+			}
+
+			$this->addFlash('success', 'Si votre email est bien associé à un compte, vous avez reçu un mail vous invitant à réinitialiser votre mot de passe');
+			return $this->redirectToRoute('home');
+		}
+
+		return $this->render('security/forgot-password.html.twig', [
+			'current_menu' => 'register',
+			'form' => $form->createView(),
+		]);
+	}
 }

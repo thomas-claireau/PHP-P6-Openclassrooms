@@ -11,24 +11,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class FigureType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $builder
-            ->add('name')
-            ->add('categories', EntityType::class, [
-                'class' => Category::class,
-                'choice_label' => 'name',
-                'multiple' => true
-            ])
-            ->add('description')
-        ;
-    }
+	public function buildForm(FormBuilderInterface $builder, array $options)
+	{
+		$builder
+			->add('name')
+			->add('categories', EntityType::class, [
+				'class' => Category::class,
+				'choice_label' => 'name',
+				'multiple' => true,
+				'required' => false,
+			])
+			->add('description');
+	}
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => Figures::class,
-            'translation_domain' => 'forms'
-        ]);
-    }
+	public function configureOptions(OptionsResolver $resolver)
+	{
+		$resolver->setDefaults([
+			'data_class' => Figures::class,
+			'translation_domain' => 'forms'
+		]);
+	}
 }

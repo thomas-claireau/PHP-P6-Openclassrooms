@@ -44,3 +44,13 @@ h1 {
 		max-width: 1360px;
 	}
 }
+
+div.alert {
+	position: fixed;
+	top: 85px;
+	max-width: 600px;
+
+	@media screen and (max-width: $break-tablet) {
+		width: 80%;
+	}
+}

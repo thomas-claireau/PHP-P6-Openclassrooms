@@ -110,16 +110,4 @@ class SecurityController extends AbstractController
 			'form' => $form->createView(),
 		]);
 	}
-
-	/**
-	 * @Route("/forgot-password", name="forgot.password")
-	 */
-	public function forgotPassword(Request $request) {
-		$user = new User();
-		$form = $this->createForm(ForgotPasswordUserType::class, $user);
-		echo '<pre>';
-		var_dump("passe");
-		echo '</pre>';
-		exit;
-	}
 }

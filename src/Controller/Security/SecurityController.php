@@ -103,6 +103,9 @@ class SecurityController extends AbstractController
 			$this->mailer->send($message);
 
 			return $this->redirectToRoute('home');
+		} else {
+			$this->addFlash('error', 'Votre inscription n\'a pas été acceptée, un problème est survenu');
+			return $this->redirectToRoute('home');
 		}
 
 		return $this->render('security/register.html.twig', [
@@ -128,7 +131,7 @@ class SecurityController extends AbstractController
 				->getRepository(User::class)
 				->findBy(array('email' => $email));
 
-			$userExist = $userExist[0];
+			$userExist = isset($userExist[0]) ? $userExist[0] : false;
 
 			if ($userExist) {
 				$userExist->setToken($token);

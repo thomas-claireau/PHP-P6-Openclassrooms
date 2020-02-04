@@ -6,9 +6,10 @@ use App\Entity\User;
 use App\Form\ResetPasswordUserType;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserValidate extends AbstractController
 {
@@ -17,9 +18,15 @@ class UserValidate extends AbstractController
 	 */
 	private $em;
 
-	public function __construct(ObjectManager $em)
+	/**
+	 * @var UserPasswordEncoderInterface
+	 */
+	private $encoder;
+
+	public function __construct(ObjectManager $em, UserPasswordEncoderInterface $encoder)
 	{
 		$this->em = $em;
+		$this->encoder = $encoder;
 	}
 
 	/**
@@ -42,6 +49,9 @@ class UserValidate extends AbstractController
 			$this->addFlash('success', 'Inscription confirmée');
 
 			return $this->redirectToRoute('home');
+		} else {
+			$this->addFlash('error', 'Inscription non confirmée, un problème est survenu');
+			return $this->redirectToRoute('home');
 		}
 	}
 
@@ -58,17 +68,26 @@ class UserValidate extends AbstractController
 			->find($id);
 
 		if ($user->getToken() === $token) {
-			$user->setToken(null);
-			$this->em->persist($user);
-			$this->em->flush();
-
 			$form = $this->createForm(ResetPasswordUserType::class, $user);
 			$form->handleRequest($request);
+
+			if ($form->isSubmitted() && $form->isValid()) {
+				$user->setPassword($this->encoder->encodePassword($user, $user->getPassword()));
+				$user->setToken(null);
+				$this->em->persist($user);
+				$this->em->flush();
+
+				$this->addFlash('success', 'Votre mot de passe a bien été réinitialisé');
+				return $this->redirectToRoute('home');
+			}
 
 			return $this->render('security/reset-password.html.twig', [
 				'current_menu' => 'register',
 				'form' => $form->createView(),
 			]);
+		} else {
+			$this->addFlash('error', 'Le lien de réinitialisation du mot de passe a expiré, veuillez recommencer');
+			return $this->redirectToRoute('home');
 		}
 	}
 }

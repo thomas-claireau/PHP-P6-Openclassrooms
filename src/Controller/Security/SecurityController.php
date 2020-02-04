@@ -103,9 +103,6 @@ class SecurityController extends AbstractController
 			$this->mailer->send($message);
 
 			return $this->redirectToRoute('home');
-		} else {
-			$this->addFlash('error', 'Votre inscription n\'a pas été acceptée, un problème est survenu');
-			return $this->redirectToRoute('home');
 		}
 
 		return $this->render('security/register.html.twig', [

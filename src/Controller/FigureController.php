@@ -60,9 +60,6 @@ class FigureController extends AbstractController
 					'id' => $figure->getId(),
 					'slug' => $figure->getSlug()
 				], 301);
-			} else {
-				$this->addFlash('error', 'Le commentaire n\'a pas été rajouté, un problème est survenu');
-				return $this->redirectToRoute('home');
 			}
 		}
 

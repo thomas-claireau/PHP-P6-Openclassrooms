@@ -47,9 +47,6 @@ class AdminFigureController extends AbstractController
 			$this->em->flush();
 			$this->addFlash('success', 'La figure a bien été créée');
 			return $this->redirectToRoute('home');
-		} else {
-			$this->addFlash('error', 'La figure n\'a pas été créée, un problème est survenu');
-			return $this->redirectToRoute('home');
 		}
 
 		return $this->render('admin/figure/new.html.twig', [
@@ -76,9 +73,6 @@ class AdminFigureController extends AbstractController
 
 			$this->em->flush();
 			$this->addFlash('success', 'La figure a bien été modifiée');
-			return $this->redirectToRoute('home');
-		} else {
-			$this->addFlash('error', 'La figure n\'a pas été modifiée, un problème est survenu');
 			return $this->redirectToRoute('home');
 		}
 

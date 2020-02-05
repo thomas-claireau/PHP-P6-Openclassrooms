@@ -1,4 +1,4 @@
-<header class="masthead" style="background-image: url({{asset('build/images/home_image.jpg')}});">
+<header class="masthead" style="background-image: url({{ current_menu is defined and current_menu == 'figure.show' or current_menu == 'admin.figure.edit' and figure.filename ? vich_uploader_asset(figure, 'imageFile') : asset('build/images/home_image.jpg')}});">
 	<div class="container h-100">
 		<div class="row h-100 align-items-center">
 			{% if current_menu is defined and current_menu == 'home' %}

@@ -6,9 +6,10 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FiguresRepository")
@@ -45,7 +46,7 @@ class Figures
 	 * @Assert\Image(
 	 *     mimeTypes="image/jpeg"
 	 * )
-	 * @Vich\UploadableField(mapping="property_image", fileNameProperty="filename")
+	 * @Vich\UploadableField(mapping="figure_image", fileNameProperty="filename")
 	 */
 	private $imageFile;
 
@@ -223,7 +224,9 @@ class Figures
 	public function setImageFile($imageFile)
 	{
 		$this->imageFile = $imageFile;
-
+		if ($this->imageFile instanceof UploadedFile) {
+			$this->updated_at = new \DateTime('now');
+		}
 		return $this;
 	}
 

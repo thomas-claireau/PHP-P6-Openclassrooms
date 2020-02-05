@@ -1,11 +1,6 @@
 {{ form_start(form) }}
 <div class="row">
 	<div class="col">
-		{{ form_row(form.imageFile) }}
-	</div>
-</div>
-<div class="row">
-	<div class="col">
 		{{ form_row(form.name) }}
 	</div>
 </div>
@@ -17,6 +12,7 @@
 <div class="row">
 	<div class="categories">
 		{{ form_row(form.categories) }}
+		<a href="{{path('admin.category.new')}}">Ajouter une catégorie</a>
 	</div>
 </div>
 

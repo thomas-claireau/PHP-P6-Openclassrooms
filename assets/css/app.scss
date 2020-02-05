@@ -54,3 +54,22 @@ div.alert {
 		width: 80%;
 	}
 }
+
+.categories {
+	display: flex;
+	align-items: center;
+	a {
+		margin-left: 20px;
+
+		@media screen and (max-width: $break-tablet) {
+			margin-left: 0;
+			position: relative;
+			top: -27px;
+			left: -35px;
+		}
+	}
+
+	@media screen and (max-width: $break-tablet) {
+		flex-direction: column;
+	}
+}

@@ -36,21 +36,6 @@ class Figures
 	private $description;
 
 	/**
-	 * @var string|null
-	 * @ORM\Column(type="string", length=255, nullable=true)
-	 */
-	private $filename;
-
-	/**
-	 * @var File|null
-	 * @Assert\Image(
-	 *     mimeTypes={"image/jpeg", "image/png"}
-	 * )
-	 * @Vich\UploadableField(mapping="figure_image", fileNameProperty="filename")
-	 */
-	private $imageFile;
-
-	/**
 	 * @ORM\Column(type="datetime")
 	 */
 	private $created_at;
@@ -200,56 +185,6 @@ class Figures
 			$this->categories->removeElement($category);
 			$category->removeFigure($this);
 		}
-
-		return $this;
-	}
-
-	/**
-	 * Get mimeTypes="image/jpeg"
-	 *
-	 * @return  File|null
-	 */
-	public function getImageFile()
-	{
-		return $this->imageFile;
-	}
-
-	/**
-	 * Set mimeTypes="image/jpeg"
-	 *
-	 * @param  File|null  $imageFile  mimeTypes="image/jpeg"
-	 *
-	 * @return  self
-	 */
-	public function setImageFile($imageFile)
-	{
-		$this->imageFile = $imageFile;
-		if ($this->imageFile instanceof UploadedFile) {
-			$this->updated_at = new \DateTime('now');
-		}
-		return $this;
-	}
-
-	/**
-	 * Get the value of filename
-	 *
-	 * @return  string|null
-	 */
-	public function getFilename()
-	{
-		return $this->filename;
-	}
-
-	/**
-	 * Set the value of filename
-	 *
-	 * @param  string|null  $filename
-	 *
-	 * @return  self
-	 */
-	public function setFilename($filename)
-	{
-		$this->filename = $filename;
 
 		return $this;
 	}

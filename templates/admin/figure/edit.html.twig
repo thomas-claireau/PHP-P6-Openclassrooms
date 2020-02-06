@@ -6,7 +6,7 @@
 
 {% block body %}
 	<div class="figure-container col text-center container">
-		<div class="image" style="background-image: url({{ figure.filename ? vich_uploader_asset(figure, 'imageFile') : asset('build/images/home_image.jpg')}});">
+		<div class="image" style="background-image: url({{ asset('build/images/home_image.jpg')}});">
 			<h1>
 				{{figure.name}}
 			</h1>

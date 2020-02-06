@@ -1,6 +1,12 @@
 {{ form_start(form) }}
-{{ form_rest(form) }}
-<button class="btn">
-	{{ button_label|default('Save') }}
-</button>
+<div class="row d-flex" style="align-items: center">
+	<div class="col" style="padding: 0">
+		{{ form_row(form.name) }}
+	</div>
+	<div class="col">
+		<button class="btn btn-primary" style="position: relative;top: 8px;">
+			{{ button_label|default('Créer une nouvelle catégorie') }}
+		</button>
+	</div>
+</div>
 {{ form_end(form) }}

@@ -9,16 +9,22 @@
 
 
 {% block body %}
-	<h1>
-		Category index
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+			{{ message }}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+	{% endfor %}
+
+	<h1 style="margin-bottom: 20px">
+		Toutes les catégories
 	</h1>
 
 	<table class="table">
 		<thead>
 			<tr>
-				<th>
-					Id
-				</th>
 				<th>
 					Name
 				</th>
@@ -31,28 +37,28 @@
 			{% for category in categories %}
 				<tr>
 					<td>
-						{{ category.id }}
-					</td>
-					<td>
 						{{ category.name }}
 					</td>
 					<td>
-						<a href="{{ path('admin.category.edit', {'id': category.id}) }}">
-							edit
-						</a>
+						<div class="actions" style="display: flex; justify-content: flex-start; align-item: center">
+							<a href="{{ path('admin.category.edit', {'id': category.id}) }}" class="btn btn-primary" style="margin-right: 15px">
+								Modifier
+							</a>
+							{{ include('admin/category/_delete_form.html.twig') }}
+						</div>
 					</td>
 				</tr>
 			{% else %}
 				<tr>
 					<td colspan="3">
-						no records found
+						Aucune catégorie trouvée
 					</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
 
-	<a href="{{ path('admin.category.new') }}">
-		Create new
+	<a href="{{ path('admin.category.new') }}" class="btn btn-primary">
+		Créer une nouvelle catégorie
 	</a>
 {% endblock %}

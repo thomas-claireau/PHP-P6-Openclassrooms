@@ -10,12 +10,12 @@
 
 {% block body %}
 	<h1>
-		Create new Category
+		Créer une nouvelle catégorie
 	</h1>
 
 	{{ include('admin/category/_form.html.twig') }}
 
-	<a href="{{ path('admin.category.index') }}">
-		back to list
+	<a href="{{ path('admin.category.index') }}" class="btn btn-secondary">
+		Retour à la liste des catégories
 	</a>
 {% endblock %}

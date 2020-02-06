@@ -44,7 +44,7 @@ class Figures
 	/**
 	 * @var File|null
 	 * @Assert\Image(
-	 *     mimeTypes="image/jpeg"
+	 *     mimeTypes={"image/jpeg", "image/png"}
 	 * )
 	 * @Vich\UploadableField(mapping="figure_image", fileNameProperty="filename")
 	 */

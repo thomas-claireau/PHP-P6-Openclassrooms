@@ -13,7 +13,8 @@
 	padding-top: 80px;
 }
 
-.admin-figure-edit {
+.admin-figure-edit,
+.admin-figure-new {
 	@import '../figures/show.scss';
 
 	.form-container {

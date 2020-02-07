@@ -6,6 +6,18 @@
 
 {% block body %}
 	<div class="figure-container col text-center container">
+		<div class="actions">
+			<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
+				<i class="fa fa-pencil" aria-hidden="true"></i>
+			</a>
+			<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+				<input type="hidden" name="_method" value="DELETE">
+				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+				<button class="btn btn-link delete">
+					<i class="fa fa-trash" aria-hidden="true"></i>
+				</button>
+			</form>
+		</div>
 		<div class="image" style="background-image: url({{ asset('build/images/home_image.jpg')}});">
 			<h1>
 				{{figure.name}}
@@ -18,7 +30,20 @@
 			<div class="medias">
 				<div class="photos">
 					{% for picture in figure.pictures %}
-						<div style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
+						<div style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
+							<div class="actions">
+								<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
+									<i class="fa fa-pencil" aria-hidden="true"></i>
+								</a>
+								<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+									<button class="btn btn-link delete">
+										<i class="fa fa-trash" aria-hidden="true"></i>
+									</button>
+								</form>
+							</div>
+						</div>
 					{% endfor %}
 				</div>
 				<div class="videos">

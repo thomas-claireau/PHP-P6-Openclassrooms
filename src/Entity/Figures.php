@@ -59,7 +59,7 @@ class Figures
 
 	/**
 	 * @Assert\All({
-	 *   @Assert\Image(mimeTypes="image/png")
+	 *   @Assert\Image(mimeTypes={"image/png", "image/jpeg"})
 	 * })
 	 */
 	private $pictureFiles;

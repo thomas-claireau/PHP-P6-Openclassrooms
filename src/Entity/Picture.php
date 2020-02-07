@@ -23,7 +23,7 @@ class Picture
 	/**
 	 * @var File|null
 	 * @Assert\Image(
-	 *     mimeTypes="image/png"
+	 *     mimeTypes={"image/png", "image/jpeg"}
 	 * )
 	 * @Vich\UploadableField(mapping="figure_image", fileNameProperty="filename")
 	 */

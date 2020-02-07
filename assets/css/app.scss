@@ -49,6 +49,7 @@ div.alert {
 	position: fixed;
 	top: 85px;
 	max-width: 600px;
+	z-index: 1000;
 
 	@media screen and (max-width: $break-tablet) {
 		width: 80%;

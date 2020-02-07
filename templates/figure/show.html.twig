@@ -33,9 +33,9 @@
 		<div class="collapse" id="mediaCollapse">
 			<div class="medias">
 				<div class="photos">
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					{% for picture in figure.pictures %}
+						<div style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
+					{% endfor %}
 				</div>
 				<div class="videos">
 					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>

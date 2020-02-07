@@ -15,10 +15,11 @@ class FigureType extends AbstractType
 	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
 		$builder
-			// ->add('imageFile', FileType::class, [
-			// 	'label' => "Image principale",
-			// 	'required' => false
-			// ])
+			->add('pictureFiles', FileType::class, [
+				'required' => false,
+				'label' => 'Photos supplémentaires',
+				'multiple' => true
+			])
 			->add('name')
 			->add('categories', EntityType::class, [
 				'class' => Category::class,

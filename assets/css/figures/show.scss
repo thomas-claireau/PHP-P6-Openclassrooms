@@ -1,171 +1,171 @@
 .figure-container {
-  margin-top: 150px;
-  background-color: #fff;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.23);
-  padding: 0 0 30px 0;
-  position: relative;
+	margin-top: 150px;
+	background-color: #fff;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.23);
+	padding: 0 0 30px 0;
+	position: relative;
 
-  .actions {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #fff;
-    padding: 4px 20px;
-    z-index: 1000;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-    align-items: center;
-    border-radius: 3px;
+	.actions {
+		position: absolute;
+		top: 20px;
+		right: 20px;
+		background-color: #fff;
+		padding: 4px 20px;
+		z-index: 1000;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-column-gap: 20px;
+		align-items: center;
+		border-radius: 3px;
 
-    button,
-    a {
-      margin: 0;
-      padding: 0;
-      font-size: 20px;
-      color: $mainColor;
+		button,
+		a {
+			margin: 0;
+			padding: 0;
+			font-size: 20px;
+			color: $mainColor;
 
-      &.edit {
-        &:hover {
-          color: $secondaryColor;
-        }
-      }
+			&.edit {
+				&:hover {
+					color: $secondaryColor;
+				}
+			}
 
-      &.delete {
-        &:hover {
-          color: $red;
-        }
-      }
-    }
-  }
+			&.delete {
+				&:hover {
+					color: $red;
+				}
+			}
+		}
+	}
 
-  .image {
-    width: 100%;
-    height: 480px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    margin-bottom: 50px;
+	.image {
+		width: 100%;
+		height: 480px;
+		background-size: cover;
+		background-position: center;
+		position: relative;
+		margin-bottom: 50px;
 
-    &:before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: #000;
-      opacity: 0.4;
-      z-index: 1;
-    }
+		&:before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #000;
+			opacity: 0.4;
+			z-index: 1;
+		}
 
-    h1 {
-      color: #fff;
-      font-weight: 300;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-    }
-  }
-  .media-mobile {
-    @media screen and (min-width: $break-tablet) {
-      display: none;
-    }
-  }
+		h1 {
+			color: #fff;
+			font-weight: 300;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 2;
+		}
+	}
+	.media-mobile {
+		@media screen and (min-width: $break-tablet) {
+			display: none;
+		}
+	}
 
-  #mediaCollapse {
-    &.inactive {
-      opacity: 0;
-      position: absolute;
-      z-index: -1;
-    }
-    @media screen and (min-width: $break-tablet) {
-      display: block;
-    }
-  }
+	#mediaCollapse {
+		&.inactive {
+			opacity: 0;
+			position: absolute;
+			z-index: -1;
+		}
+		@media screen and (min-width: $break-tablet) {
+			display: block;
+		}
+	}
 
-  .medias {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-column-gap: 20px;
-    padding: 20px;
+	.medias {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
-    @media screen and (max-width: $break-header) {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-    }
-  }
-  .photos,
-  .videos {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
+		.photos {
+			margin-right: 20px;
+		}
 
-    > div {
-      background-size: cover;
-      background-position: center;
-      height: 125px;
-      width: 190px;
+		@media screen and (max-width: $break-header) {
+			flex-direction: column;
+		}
+	}
+	.photos,
+	.videos {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		grid-column-gap: 20px;
+		grid-row-gap: 20px;
 
-      @media screen and (max-width: $break-header) {
-        margin-bottom: 10px;
-        margin-right: 10px;
-      }
-    }
+		> div {
+			background-size: cover;
+			background-position: center;
+			height: 125px;
+			width: 190px;
 
-    @media screen and (max-width: $break-header) {
-      display: flex;
-      justify-content: center;
-      align-content: center;
-      flex-wrap: wrap;
-    }
-  }
+			@media screen and (max-width: $break-header) {
+				margin-bottom: 10px;
+				margin-right: 10px;
+			}
+		}
 
-  .videos {
-    > div {
-      position: relative;
-      cursor: pointer;
+		@media screen and (max-width: $break-header) {
+			display: flex;
+			justify-content: center;
+			align-content: center;
+			flex-wrap: wrap;
+		}
+	}
 
-      &:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #000;
-        opacity: 0.7;
-      }
+	.videos {
+		> div {
+			position: relative;
+			cursor: pointer;
 
-      &:after {
-        content: "\f01d";
-        font-family: FontAwesome;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #fff;
-        font-size: 50px;
-      }
-    }
-  }
+			&:before {
+				content: '';
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: #000;
+				opacity: 0.7;
+			}
 
-  .text {
-    padding: 50px;
+			&:after {
+				content: '\f01d';
+				font-family: FontAwesome;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				color: #fff;
+				font-size: 50px;
+			}
+		}
+	}
 
-    @media screen and (max-width: $break-tablet) {
-      padding: 20px;
-    }
-  }
+	.text {
+		padding: 50px;
 
-  .infos {
-    .btn-group {
-      margin-bottom: 10px;
-    }
-  }
+		@media screen and (max-width: $break-tablet) {
+			padding: 20px;
+		}
+	}
+
+	.infos {
+		.btn-group {
+			margin-bottom: 10px;
+		}
+	}
 }

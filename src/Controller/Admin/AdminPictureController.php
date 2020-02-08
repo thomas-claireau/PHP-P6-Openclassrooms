@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Picture;
 use App\Form\PictureType;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("admin/picture")
  */
-class PictureController extends AbstractController
+class AdminPictureController extends AbstractController
 {
 	/**
 	 * @Route("/new", name="admin.picture.new", methods={"GET","POST"})
@@ -69,6 +69,10 @@ class PictureController extends AbstractController
 			$entityManager->flush();
 		}
 
-		return $this->redirectToRoute('home');
+		// return $this->render('admin/figure/edit.html.twig', [
+		// 	'figure' => $figure,
+		// 	'form'     => $form->createView(),
+		// 	'current_menu' => 'admin.figure.edit',
+		// ]);
 	}
 }

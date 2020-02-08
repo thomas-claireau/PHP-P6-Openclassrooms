@@ -11,23 +11,7 @@
 			Les dernières figures
 		</h2>
 
-		{% for message in app.flashes('success') %}
-			<div class="alert alert-success alert-dismissible fade show" role="alert">
-				{{ message }}
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		{% endfor %}
-
-		{% for message in app.flashes('error') %}
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				{{ message }}
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-		{% endfor %}
+		{% include "flash.html.twig" %}
 
 		<div class="row flex">
 			<div class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-2 row-cols-1">

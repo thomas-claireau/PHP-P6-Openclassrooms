@@ -2,20 +2,32 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Figures;
 use App\Entity\Picture;
 use App\Form\PictureType;
 use App\Repository\PictureRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\Common\Persistence\ObjectManager;
 
 /**
  * @Route("admin/picture")
  */
 class AdminPictureController extends AbstractController
 {
+	/**
+	 * @var ObjectManager
+	 */
+	private $em;
+
+	public function __construct(ObjectManager $em)
+	{
+		$this->em = $em;
+	}
+
 	/**
 	 * @Route("/new", name="admin.picture.new", methods={"GET","POST"})
 	 */
@@ -26,6 +38,8 @@ class AdminPictureController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
+			$date = new \DateTime();
+			$picture->setUpdatedAt($date);
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->persist($picture);
 			$entityManager->flush();
@@ -40,21 +54,31 @@ class AdminPictureController extends AbstractController
 	}
 
 	/**
-	 * @Route("/{id}/edit", name="admin.picture.edit", methods={"GET","POST"})
+	 * @Route("/{id}/{idFigure}/edit", name="admin.picture.edit", methods={"GET","POST"})
 	 */
 	public function edit(Request $request, Picture $picture): Response
 	{
+		$params = $request->attributes->get('_route_params');
+		$idFigure = $params['idFigure'];
+		$figure = $this->getDoctrine()
+			->getRepository(Figures::class)
+			->find($idFigure);
+
 		$form = $this->createForm(PictureType::class, $picture);
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-			$this->getDoctrine()->getManager()->flush();
-
-			return $this->redirectToRoute('picture_index');
+			$picture->setUpdatedAt(new \DateTime());
+			$picture->setImageFile($form->get('imageFile')->getData());
+			$this->em->flush();
+			$this->addFlash('success', 'L\'image a bien été modifiée');
+			return $this->redirectToRoute('home');
 		}
 
 		return $this->render('admin/picture/edit.html.twig', [
 			'picture' => $picture,
+			'figure' => $figure,
+			'current_menu' => "admin.picture.edit",
 			'form' => $form->createView(),
 		]);
 	}

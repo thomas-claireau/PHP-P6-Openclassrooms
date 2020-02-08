@@ -35,7 +35,7 @@
 						{% for picture in figure.pictures %}
 							<div class="photo" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
 								<div class="actions">
-									<a class="edit" href="{{ path('admin.picture.edit', {id: picture.id}) }}">
+									<a class="edit" href="{{ path('admin.picture.edit', {id: picture.id, idFigure: figure.id}) }}">
 										<i class="fa fa-pencil" aria-hidden="true"></i>
 									</a>
 									<a class="btn btn-link delete" href="{{ path('admin.picture.delete', {id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cette photo ?');">

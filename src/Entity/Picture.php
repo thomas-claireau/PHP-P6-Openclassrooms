@@ -40,50 +40,74 @@ class Picture
 	 */
 	private $figures;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
 	public function getId(): ?int
-	{
-		return $this->id;
-	}
+         	{
+         		return $this->id;
+         	}
+
+	public function setId(?int $id): self
+         	{
+         		$this->id = $id;
+         
+         		return $this;
+         	}
 
 	public function getFilename(): ?string
-	{
-		return $this->filename;
-	}
+         	{
+         		return $this->filename;
+         	}
 
 	public function setFilename(?string $filename): self
-	{
-		$this->filename = $filename;
-
-		return $this;
-	}
+         	{
+         		$this->filename = $filename;
+         
+         		return $this;
+         	}
 
 	public function getFigures(): ?Figures
-	{
-		return $this->figures;
-	}
+         	{
+         		return $this->figures;
+         	}
 
 	public function setFigures(?Figures $figures): self
-	{
-		$this->figures = $figures;
-
-		return $this;
-	}
+         	{
+         		$this->figures = $figures;
+         
+         		return $this;
+         	}
 
 	/**
 	 * @return null|File
 	 */
 	public function getImageFile(): ?File
-	{
-		return $this->imageFile;
-	}
+         	{
+         		return $this->imageFile;
+         	}
 
 	/**
 	 * @param null|File $imageFile
 	 * @return self
 	 */
 	public function setImageFile(?File $imageFile): self
-	{
-		$this->imageFile = $imageFile;
-		return $this;
-	}
+         	{
+         		$this->imageFile = $imageFile;
+         		return $this;
+         	}
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
 }

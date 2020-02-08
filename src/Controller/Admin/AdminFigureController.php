@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Figures;
+use App\Entity\Picture;
 use App\Form\FigureType;
+use App\Form\PictureType;
 use App\Repository\FiguresRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;

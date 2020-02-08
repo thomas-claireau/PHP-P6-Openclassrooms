@@ -22,7 +22,13 @@
 			</div>
 		{% endif %}
 
-		<div class="image" style="background-image: url({{ asset('build/images/home_image.jpg')}});">
+		{% if figure.pictures|length > 0 and figure.mainImgFileName is empty %}
+			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+		{% elseif figure.mainImgFileName is not empty %}
+			{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') %}
+		{% endif %}
+
+		<div class="image" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
 			<h1>
 				{{figure.name}}
 			</h1>

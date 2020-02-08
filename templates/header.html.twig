@@ -1,4 +1,13 @@
-<header class="masthead" style="background-image: url({{ asset('build/images/home_image.jpg')}});">
+{% if figure is defined and figure.pictures|length > 0 and figure.mainImgFileName is empty %}
+	{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+{% elseif figure is defined and figure.mainImgFileName is not empty %}
+	{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') %}
+{% elseif current_menu == "home" %}
+	{% set mainImage = asset('build/images/home_image.jpg') %}
+{% endif %}
+
+
+<header class="masthead" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
 	<div class="container h-100">
 		<div class="row h-100 align-items-center">
 			{% if current_menu is defined and current_menu == 'home' %}

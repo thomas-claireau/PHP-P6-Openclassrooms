@@ -5,6 +5,8 @@ namespace App\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -12,6 +14,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FiguresRepository")
  * @UniqueEntity("name")
+ * @Vich\Uploadable()
  */
 class Figures
 {
@@ -21,6 +24,18 @@ class Figures
 	 * @ORM\Column(type="integer")
 	 */
 	private $id;
+
+	/**
+	 * @var string|null
+	 * @ORM\Column(type="string", length=255)
+	 */
+	private $mainImgFilename;
+
+	/**
+	 * @var File|null
+	 * @Vich\UploadableField(mapping="figure_image", fileNameProperty="mainImgFilename")
+	 */
+	private $mainImgFile;
 
 	/**
 	 * @ORM\Column(type="string", length=255)
@@ -81,6 +96,53 @@ class Figures
 		return $this->id;
 	}
 
+	/**
+	 * Get the value of mainImgFilename
+	 *
+	 * @return  string|null
+	 */
+	public function getMainImgFilename()
+	{
+		return $this->mainImgFilename;
+	}
+
+	/**
+	 * Set the value of mainImgFilename
+	 *
+	 * @param  string|null  $mainImgFilename
+	 *
+	 * @return  self
+	 */
+	public function setMainImgFilename($mainImgFilename)
+	{
+		$this->mainImgFilename = $mainImgFilename;
+
+		return $this;
+	}
+
+	/**
+	 * Get the value of mainImgFile
+	 *
+	 * @return  File|null
+	 */
+	public function getMainImgFile()
+	{
+		return $this->mainImgFile;
+	}
+
+	/**
+	 * Set the value of mainImgFile
+	 *
+	 * @param  File|null  $mainImgFile
+	 *
+	 * @return  self
+	 */
+	public function setMainImgFile($mainImgFile)
+	{
+		$this->mainImgFile = $mainImgFile;
+
+		return $this;
+	}
 
 	public function getName(): ?string
 	{

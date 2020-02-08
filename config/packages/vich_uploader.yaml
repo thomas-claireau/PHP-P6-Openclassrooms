@@ -5,4 +5,3 @@ vich_uploader:
         figure_image:
             uri_prefix: /images/figures
             upload_destination: '%kernel.project_dir%/public/images/figures'
-            namer: Vich\UploaderBundle\Naming\UniqidNamer

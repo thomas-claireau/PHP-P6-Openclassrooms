@@ -10,7 +10,7 @@
 	<div class="figure-container col text-center container">
 		<div class="actions">
 			<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
-				<i class="fa fa-pencil" aria-hidden="true"></i>
+				<i class="fa fa-file-image-o" aria-hidden="true"></i>
 			</a>
 			<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
 				<input type="hidden" name="_method" value="DELETE">

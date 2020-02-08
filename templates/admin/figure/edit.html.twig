@@ -5,6 +5,8 @@
 {% block subtitle 'Snow Tricks' %}
 
 {% block body %}
+
+	{% include "flash.html.twig" %}
 	<div class="figure-container col text-center container">
 		<div class="actions">
 			<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
@@ -28,24 +30,24 @@
 		</a>
 		<div class="collapse" id="mediaCollapse">
 			<div class="medias">
-				<div class="photos">
-					{% for picture in figure.pictures %}
-						<div style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
-							<div class="actions">
-								<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
-									<i class="fa fa-pencil" aria-hidden="true"></i>
-								</a>
-								<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
-									<input type="hidden" name="_method" value="DELETE">
-									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
-									<button class="btn btn-link delete">
+				{% if figure.pictures|length > 0 %}
+					<div class="photos">
+						{% for picture in figure.pictures %}
+							<div class="photo" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
+								<div class="actions">
+									<a class="edit" href="{{ path('admin.picture.edit', {id: picture.id}) }}">
+										<i class="fa fa-pencil" aria-hidden="true"></i>
+									</a>
+									<a class="btn btn-link delete" href="{{ path('admin.picture.delete', {id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cette photo ?');">
 										<i class="fa fa-trash" aria-hidden="true"></i>
-									</button>
-								</form>
+									</a>
+									{# {% include "admin/picture/_delete_form.html.twig" %} #}
+								</div>
 							</div>
-						</div>
-					{% endfor %}
-				</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+
 				<div class="videos">
 					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
 					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>

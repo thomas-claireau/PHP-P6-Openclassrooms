@@ -34,7 +34,7 @@
 			<div class="medias">
 				<div class="photos">
 					{% for picture in figure.pictures %}
-						<div style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
+						<div class="photo" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
 					{% endfor %}
 				</div>
 				<div class="videos">

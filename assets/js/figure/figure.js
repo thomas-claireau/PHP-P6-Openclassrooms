@@ -19,10 +19,29 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 	if (figureEditPage) {
 		const formRemoveFigure = figureEditPage.querySelector('#removeFigure');
-		const containerToMove = figureEditPage.querySelector('.actions-form');
+		const containerActionsForm = figureEditPage.querySelector('.actions-form');
 
-		if (formRemoveFigure && containerToMove) {
-			containerToMove.appendChild(formRemoveFigure);
+		const formRemoveMainImg = figureEditPage.querySelector('#removeMainImg');
+		const containerActionsMainImg = figureEditPage.querySelector('.actions');
+
+		if (formRemoveFigure && containerActionsForm) {
+			containerActionsForm.appendChild(formRemoveFigure);
+		}
+
+		if (formRemoveMainImg && containerActionsMainImg) {
+			containerActionsMainImg.append(formRemoveMainImg);
+
+			formRemoveMainImg.addEventListener('submit', (e) => {
+				const message = confirm(
+					"Vous êtes sur le point de supprimer l'image principale de la figure. Êtes vous vraiment sûr ?"
+				);
+				if (!message) {
+					e.preventDefault();
+					return;
+				}
+
+				return message;
+			});
 		}
 	}
 });

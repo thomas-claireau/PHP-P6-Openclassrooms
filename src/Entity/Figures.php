@@ -67,6 +67,20 @@ class Figures
 	 */
 	private $pictureFiles;
 
+	/**
+	 * @ORM\Column(type="string", length=255, nullable=true)
+	 */
+	private $main_image;
+
+	/**
+	 * @var File|null
+	 * @Assert\Image(
+	 *     mimeTypes={"image/png", "image/jpeg"}
+	 * )
+	 * @Vich\UploadableField(mapping="figure_main_image", fileNameProperty="main_image")
+	 */
+	private $mainImgFile;
+
 	public function __construct()
 	{
 		$this->comments = new ArrayCollection();
@@ -260,6 +274,42 @@ class Figures
 			$this->addPicture($picture);
 		}
 		$this->pictureFiles = $pictureFiles;
+		return $this;
+	}
+
+	public function getMainImage(): ?string
+	{
+		return $this->main_image;
+	}
+
+	public function setMainImage(?string $main_image): self
+	{
+		$this->main_image = $main_image;
+
+		return $this;
+	}
+
+	/**
+	 * Get mimeTypes={"image/png", "image/jpeg"}
+	 *
+	 * @return  File|null
+	 */
+	public function getMainImgFile()
+	{
+		return $this->mainImgFile;
+	}
+
+	/**
+	 * Set mimeTypes={"image/png", "image/jpeg"}
+	 *
+	 * @param  File|null  $mainImgFile  mimeTypes={"image/png", "image/jpeg"}
+	 *
+	 * @return  self
+	 */
+	public function setMainImgFile($mainImgFile)
+	{
+		$this->mainImgFile = $mainImgFile;
+
 		return $this;
 	}
 }

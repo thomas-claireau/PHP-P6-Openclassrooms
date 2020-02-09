@@ -17,6 +17,13 @@
 				Supprimer
 			</button>
 		</form>
+		<form id="removeMainImg" method="post" action="{{ path('admin.figure.mainImg.delete', {'id': figure.id}) }}" onsubmit="return confirm('Vous êtes sur le point de supprimer l'image principale de la figure. Êtes vous vraiment sûr ?');">
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+			<button class="btn btn-link delete">
+				<i class="fa fa-trash" aria-hidden="true"></i>
+			</button>
+		</form>
 	</div>
 
 

@@ -1,12 +1,12 @@
 {{ form_start(form) }}
 
 <div class="actions">
-	<button class="btn btn-link edit">
-		<i class="fa fa-file-image-o" aria-hidden="true"></i>
-	</button>
-	<button class="btn btn-link delete">
-		<i class="fa fa-trash" aria-hidden="true"></i>
-	</button>
+	<div class="figure_mainImgFile">
+		<label for="figure_mainImgFile">
+			<i class="fa fa-file-image-o" aria-hidden="true"></i>
+		</label>
+		{{ form_row(form.mainImgFile) }}
+	</div>
 </div>
 
 {% if figure.pictures|length > 0 %}

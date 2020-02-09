@@ -15,31 +15,38 @@ use Doctrine\ORM\Query;
  */
 class FiguresRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Figures::class);
-    }
+	public function __construct(ManagerRegistry $registry)
+	{
+		parent::__construct($registry, Figures::class);
+	}
 
-    /**
-     * @return Figures[]
-     */
-    public function findAll(): array
-    {
-        return $this->getQueryDesc()
-            ->getQuery()
-            ->getResult();
-    }
+	/**
+	 * @return Figures[]
+	 */
+	public function findAll(): array
+	{
+		return $this->getQueryDesc()
+			->getQuery()
+			->getResult();
+	}
 
-    public function findAllQuery(): Query
-    {
-        return $this->getQueryDesc()
-            ->getQuery();
-    }
+	public function findAllQuery(): Query
+	{
+		return $this->getQueryDesc()
+			->getQuery();
+	}
 
-    // /**
-    //  * @return Figures[] Returns an array of Figures objects
-    //  */
-    /*
+	public function removeMainImg($id): Query
+	{
+		return $this->getQueryRemove($id)
+			->getQuery()
+			->execute();
+	}
+
+	// /**
+	//  * @return Figures[] Returns an array of Figures objects
+	//  */
+	/*
     public function findByExampleField($value)
     {
         return $this->createQueryBuilder('f')
@@ -53,7 +60,7 @@ class FiguresRepository extends ServiceEntityRepository
     }
     */
 
-    /*
+	/*
     public function findOneBySomeField($value): ?Figures
     {
         return $this->createQueryBuilder('f')
@@ -64,10 +71,19 @@ class FiguresRepository extends ServiceEntityRepository
         ;
     }
     */
-    private function getQueryDesc()
-    {
-        return $this->createQueryBuilder('p')
-            ->orderBy('p.updated_at', 'DESC')
-            ->setMaxResults(15);
-    }
+	private function getQueryDesc()
+	{
+		return $this->createQueryBuilder('p')
+			->orderBy('p.updated_at', 'DESC')
+			->setMaxResults(15);
+	}
+
+	private function getQueryRemove($id)
+	{
+		return $this->createQueryBuilder('p')
+			->delete('MainImage')
+			->from(Figures::class, 'f')
+			->where('p.id = :id')
+			->setParameter('id', $id);
+	}
 }

@@ -18,6 +18,23 @@
 		align-items: center;
 		border-radius: 3px;
 
+		.figure_mainImgFile {
+			label {
+				cursor: pointer;
+				margin: 0;
+				&:hover {
+					i {
+						color: $secondaryColor;
+					}
+				}
+			}
+			.form-group {
+				opacity: 0;
+				position: absolute;
+				z-index: -1;
+			}
+		}
+
 		button,
 		a {
 			margin: 0;

@@ -22,6 +22,7 @@ class AdminFigureController extends AbstractController
 	private $repository;
 	/**
 	 * @var ObjectManager
+	 * @var \Doctrine\ORM\EntityManager
 	 */
 	private $em;
 
@@ -94,6 +95,25 @@ class AdminFigureController extends AbstractController
 	{
 		if ($this->isCsrfTokenValid('delete' . $figure->getId(), $request->get('_token'))) {
 			$this->em->remove($figure);
+			$this->em->flush();
+			$this->addFlash('success', 'La figure a bien été supprimée');
+		} else {
+			$this->addFlash('error', 'La figure n\'a pas été supprimée, un problème est survenu');
+			return $this->redirectToRoute('home');
+		}
+		return $this->redirectToRoute('home');
+	}
+
+	/**
+	 * @Route("/admin/figure/mainImg/{id}", name="admin.figure.mainImg.delete", methods="DELETE")
+	 * @param Figures $figure
+	 * @return \Symfony\Component\HttpFoundation\RedirectResponse
+	 */
+	public function deleteMainImg(Figures $figure, Request $request)
+	{
+		if ($this->isCsrfTokenValid('delete' . $figure->getId(), $request->get('_token'))) {
+			$figure->setMainImage(null);
+			$figure->setUpdatedAt(new \DateTime());
 			$this->em->flush();
 			$this->addFlash('success', 'La figure a bien été supprimée');
 		} else {

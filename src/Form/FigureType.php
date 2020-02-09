@@ -20,11 +20,6 @@ class FigureType extends AbstractType
 				'label' => 'Photos supplémentaires',
 				'multiple' => true
 			])
-			->add('mainImgFile', FileType::class, [
-				'required' => false,
-				'label' => 'Photo principale',
-				'multiple' => false
-			])
 			->add('name')
 			->add('categories', EntityType::class, [
 				'class' => Category::class,

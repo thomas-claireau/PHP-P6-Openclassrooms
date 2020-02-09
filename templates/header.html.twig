@@ -1,6 +1,6 @@
-{% if figure is defined and figure.pictures|length > 0 and figure.mainImgFileName is empty %}
+{% if figure is defined and figure.pictures|length > 0 %}
 	{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
-{% elseif figure is defined and figure.mainImgFileName is not empty %}
+{% elseif figure is defined %}
 	{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') %}
 {% elseif current_menu == "home" %}
 	{% set mainImage = asset('build/images/home_image.jpg') %}

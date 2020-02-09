@@ -26,18 +26,6 @@ class Figures
 	private $id;
 
 	/**
-	 * @var string|null
-	 * @ORM\Column(type="string", length=255)
-	 */
-	private $mainImgFilename;
-
-	/**
-	 * @var File|null
-	 * @Vich\UploadableField(mapping="figure_image", fileNameProperty="mainImgFilename")
-	 */
-	private $mainImgFile;
-
-	/**
 	 * @ORM\Column(type="string", length=255)
 	 */
 	private $name;
@@ -94,54 +82,6 @@ class Figures
 	public function getId(): ?int
 	{
 		return $this->id;
-	}
-
-	/**
-	 * Get the value of mainImgFilename
-	 *
-	 * @return  string|null
-	 */
-	public function getMainImgFilename()
-	{
-		return $this->mainImgFilename;
-	}
-
-	/**
-	 * Set the value of mainImgFilename
-	 *
-	 * @param  string|null  $mainImgFilename
-	 *
-	 * @return  self
-	 */
-	public function setMainImgFilename($mainImgFilename)
-	{
-		$this->mainImgFilename = $mainImgFilename;
-
-		return $this;
-	}
-
-	/**
-	 * Get the value of mainImgFile
-	 *
-	 * @return  File|null
-	 */
-	public function getMainImgFile()
-	{
-		return $this->mainImgFile;
-	}
-
-	/**
-	 * Set the value of mainImgFile
-	 *
-	 * @param  File|null  $mainImgFile
-	 *
-	 * @return  self
-	 */
-	public function setMainImgFile($mainImgFile)
-	{
-		$this->mainImgFile = $mainImgFile;
-
-		return $this;
 	}
 
 	public function getName(): ?string

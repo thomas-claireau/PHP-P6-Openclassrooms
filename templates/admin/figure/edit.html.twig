@@ -8,72 +8,15 @@
 
 	{% include "flash.html.twig" %}
 	<div class="figure-container col text-center container">
-		<div class="actions">
-			<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
-				<input type="hidden" name="_method" value="DELETE">
-				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
-				<button class="btn btn-link edit">
-					<i class="fa fa-file-image-o" aria-hidden="true"></i>
-				</button>
-			</form>
-			<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
-				<input type="hidden" name="_method" value="DELETE">
-				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
-				<button class="btn btn-link delete">
-					<i class="fa fa-trash" aria-hidden="true"></i>
-				</button>
-			</form>
-		</div>
+		{{ include('admin/figure/_form_edit.html.twig', {button: 'Modifier'}) }}
 
-		{% if figure.pictures|length > 0 %}
-			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
-		{% endif %}
-
-		<div class="image" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
-			<h1>
-				{{figure.name}}
-			</h1>
-		</div>
-		<a class="btn btn-primary media-mobile" data-toggle="collapse" href="#mediaCollapse" role="button" aria-expanded="false" aria-controls="mediaCollapse">
-			Voir les médias
-		</a>
-		<div class="collapse" id="mediaCollapse">
-			<div class="medias">
-				{% if figure.pictures|length > 0 %}
-					<div class="photos">
-						{% for picture in figure.pictures %}
-							<div class="photo" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
-								<div class="actions">
-									<a class="edit" href="{{ path('admin.picture.edit', {id: picture.id, idFigure: figure.id}) }}">
-										<i class="fa fa-pencil" aria-hidden="true"></i>
-									</a>
-									<a class="btn btn-link delete" href="{{ path('admin.picture.delete', {id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cette photo ?');">
-										<i class="fa fa-trash" aria-hidden="true"></i>
-									</a>
-									{# {% include "admin/picture/_delete_form.html.twig" %} #}
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-				{% endif %}
-
-				<div class="videos">
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-				</div>
-			</div>
-		</div>
-		<div class="container mt-4 form-container">
-			{{ include('admin/figure/_form.html.twig', {button: 'Modifier'}) }}
-			<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
-				<input type="hidden" name="_method" value="DELETE">
-				<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
-				<button class="btn btn-danger delete">
-					Supprimer
-				</button>
-			</form>
-		</div>
+		<form id="removeFigure" method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+			<button class="btn btn-danger delete">
+				Supprimer
+			</button>
+		</form>
 	</div>
 
 

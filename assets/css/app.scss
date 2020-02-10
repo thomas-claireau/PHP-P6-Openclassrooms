@@ -74,3 +74,10 @@ div.alert {
 		flex-direction: column;
 	}
 }
+
+.iframe {
+	margin: 20px 0;
+	iframe {
+		width: 100% !important;
+	}
+}

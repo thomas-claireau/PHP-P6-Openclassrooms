@@ -81,213 +81,219 @@ class Figures
 	 */
 	private $mainImgFile;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="figure")
+     */
+    private $videos;
+
 	public function __construct()
-	{
-		$this->comments = new ArrayCollection();
-		$this->categories = new ArrayCollection();
-		$this->pictures = new ArrayCollection();
-	}
+               	{
+               		$this->comments = new ArrayCollection();
+               		$this->categories = new ArrayCollection();
+               		$this->pictures = new ArrayCollection();
+                 $this->videos = new ArrayCollection();
+               	}
 
 	public function __toString()
-	{
-		return $this->name;
-	}
+               	{
+               		return $this->name;
+               	}
 
 	public function getId(): ?int
-	{
-		return $this->id;
-	}
+               	{
+               		return $this->id;
+               	}
 
 	public function getName(): ?string
-	{
-		return $this->name;
-	}
+               	{
+               		return $this->name;
+               	}
 
 	public function setName(string $name): self
-	{
-		$this->name = $name;
-
-		return $this;
-	}
+               	{
+               		$this->name = $name;
+               
+               		return $this;
+               	}
 
 	public function getSlug(): string
-	{
-		return (new Slugify())->slugify($this->name);
-	}
+               	{
+               		return (new Slugify())->slugify($this->name);
+               	}
 
 	public function getDescription(): ?string
-	{
-		return $this->description;
-	}
+               	{
+               		return $this->description;
+               	}
 
 	public function setDescription(string $description): self
-	{
-		$this->description = $description;
-
-		return $this;
-	}
+               	{
+               		$this->description = $description;
+               
+               		return $this;
+               	}
 
 	public function getCreatedAt(): ?\DateTimeInterface
-	{
-		return $this->created_at;
-	}
+               	{
+               		return $this->created_at;
+               	}
 
 	public function setCreatedAt(\DateTimeInterface $created_at): self
-	{
-		$this->created_at = $created_at;
-
-		return $this;
-	}
+               	{
+               		$this->created_at = $created_at;
+               
+               		return $this;
+               	}
 
 	public function getUpdatedAt(): ?\DateTimeInterface
-	{
-		return $this->updated_at;
-	}
+               	{
+               		return $this->updated_at;
+               	}
 
 	public function setUpdatedAt(\DateTimeInterface $updated_at): self
-	{
-		$this->updated_at = $updated_at;
-
-		return $this;
-	}
+               	{
+               		$this->updated_at = $updated_at;
+               
+               		return $this;
+               	}
 
 	public function dateIsSame()
-	{
-		return $this->created_at == $this->updated_at;
-	}
+               	{
+               		return $this->created_at == $this->updated_at;
+               	}
 
 	/**
 	 * @return Collection|Comment[]
 	 */
 	public function getComments(): Collection
-	{
-		return $this->comments;
-	}
+               	{
+               		return $this->comments;
+               	}
 
 	public function addComment(Comment $comment): self
-	{
-		if (!$this->comments->contains($comment)) {
-			$this->comments[] = $comment;
-			$comment->setFigure($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if (!$this->comments->contains($comment)) {
+               			$this->comments[] = $comment;
+               			$comment->setFigure($this);
+               		}
+               
+               		return $this;
+               	}
 
 	public function removeComment(Comment $comment): self
-	{
-		if ($this->comments->contains($comment)) {
-			$this->comments->removeElement($comment);
-			// set the owning side to null (unless already changed)
-			if ($comment->getFigure() === $this) {
-				$comment->setFigure(null);
-			}
-		}
-
-		return $this;
-	}
+               	{
+               		if ($this->comments->contains($comment)) {
+               			$this->comments->removeElement($comment);
+               			// set the owning side to null (unless already changed)
+               			if ($comment->getFigure() === $this) {
+               				$comment->setFigure(null);
+               			}
+               		}
+               
+               		return $this;
+               	}
 
 	/**
 	 * @return Collection|Category[]
 	 */
 	public function getCategories(): Collection
-	{
-		return $this->categories;
-	}
+               	{
+               		return $this->categories;
+               	}
 
 	public function addCategory(Category $category): self
-	{
-		if (!$this->categories->contains($category)) {
-			$this->categories[] = $category;
-			$category->addFigure($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if (!$this->categories->contains($category)) {
+               			$this->categories[] = $category;
+               			$category->addFigure($this);
+               		}
+               
+               		return $this;
+               	}
 
 	public function removeCategory(Category $category): self
-	{
-		if ($this->categories->contains($category)) {
-			$this->categories->removeElement($category);
-			$category->removeFigure($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if ($this->categories->contains($category)) {
+               			$this->categories->removeElement($category);
+               			$category->removeFigure($this);
+               		}
+               
+               		return $this;
+               	}
 
 	/**
 	 * @return Collection|Picture[]
 	 */
 	public function getPictures(): Collection
-	{
-		return $this->pictures;
-	}
+               	{
+               		return $this->pictures;
+               	}
 
 	public function getPicture(): ?Picture
-	{
-		if ($this->pictures->isEmpty()) {
-			return null;
-		}
-		return $this->pictures->first();
-	}
+               	{
+               		if ($this->pictures->isEmpty()) {
+               			return null;
+               		}
+               		return $this->pictures->first();
+               	}
 
 	public function addPicture(Picture $picture): self
-	{
-		if (!$this->pictures->contains($picture)) {
-			$this->pictures[] = $picture;
-			$picture->setFigures($this);
-		}
-
-		return $this;
-	}
+               	{
+               		if (!$this->pictures->contains($picture)) {
+               			$this->pictures[] = $picture;
+               			$picture->setFigures($this);
+               		}
+               
+               		return $this;
+               	}
 
 	public function removePicture(Picture $picture): self
-	{
-		if ($this->pictures->contains($picture)) {
-			$this->pictures->removeElement($picture);
-			// set the owning side to null (unless already changed)
-			if ($picture->getFigures() === $this) {
-				$picture->setFigures(null);
-			}
-		}
-
-		return $this;
-	}
+               	{
+               		if ($this->pictures->contains($picture)) {
+               			$this->pictures->removeElement($picture);
+               			// set the owning side to null (unless already changed)
+               			if ($picture->getFigures() === $this) {
+               				$picture->setFigures(null);
+               			}
+               		}
+               
+               		return $this;
+               	}
 
 	/**
 	 * @return mixed
 	 */
 	public function getPictureFiles()
-	{
-		return $this->pictureFiles;
-	}
+               	{
+               		return $this->pictureFiles;
+               	}
 
 	/**
 	 * @param mixed $pictureFiles
 	 * @return Figures
 	 */
 	public function setPictureFiles($pictureFiles): self
-	{
-		foreach ($pictureFiles as $pictureFile) {
-			$picture = new Picture();
-			$picture->setImageFile($pictureFile);
-			$this->addPicture($picture);
-		}
-		$this->pictureFiles = $pictureFiles;
-		return $this;
-	}
+               	{
+               		foreach ($pictureFiles as $pictureFile) {
+               			$picture = new Picture();
+               			$picture->setImageFile($pictureFile);
+               			$this->addPicture($picture);
+               		}
+               		$this->pictureFiles = $pictureFiles;
+               		return $this;
+               	}
 
 	public function getMainImage(): ?string
-	{
-		return $this->main_image;
-	}
+               	{
+               		return $this->main_image;
+               	}
 
 	public function setMainImage(?string $main_image): self
-	{
-		$this->main_image = $main_image;
-
-		return $this;
-	}
+               	{
+               		$this->main_image = $main_image;
+               
+               		return $this;
+               	}
 
 	/**
 	 * Get mimeTypes={"image/png", "image/jpeg"}
@@ -295,9 +301,9 @@ class Figures
 	 * @return  File|null
 	 */
 	public function getMainImgFile()
-	{
-		return $this->mainImgFile;
-	}
+               	{
+               		return $this->mainImgFile;
+               	}
 
 	/**
 	 * Set mimeTypes={"image/png", "image/jpeg"}
@@ -307,9 +313,40 @@ class Figures
 	 * @return  self
 	 */
 	public function setMainImgFile($mainImgFile)
-	{
-		$this->mainImgFile = $mainImgFile;
+               	{
+               		$this->mainImgFile = $mainImgFile;
+               
+               		return $this;
+               	}
 
-		return $this;
-	}
+    /**
+     * @return Collection|Video[]
+     */
+    public function getVideos(): Collection
+    {
+        return $this->videos;
+    }
+
+    public function addVideo(Video $video): self
+    {
+        if (!$this->videos->contains($video)) {
+            $this->videos[] = $video;
+            $video->setFigure($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVideo(Video $video): self
+    {
+        if ($this->videos->contains($video)) {
+            $this->videos->removeElement($video);
+            // set the owning side to null (unless already changed)
+            if ($video->getFigure() === $this) {
+                $video->setFigure(null);
+            }
+        }
+
+        return $this;
+    }
 }

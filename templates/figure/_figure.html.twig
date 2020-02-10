@@ -1,6 +1,8 @@
 <a href="{{ path('figure.show', { id: figure.id, slug: figure.slug }) }}" class="card mt-4 figure">
-	{% if figure.pictures|length > 0 %}
+	{% if figure.pictures|length > 0 and (figure.main_image is null or figure.main_image is empty) %}
 		{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+	{% elseif (figure.mainImage) %}
+		{% set mainImage = vich_uploader_asset(figure.mainImage, 'mainImgFile', 'App\\Entity\\Figures') %}
 	{% endif %}
 
 	<div class="card-img-top" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }})"></div>

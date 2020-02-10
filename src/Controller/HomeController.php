@@ -9,17 +9,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    /**
-     * @Route("/", name="home")
-     *
-     * @return Response
-     */
-    public function index(FiguresRepository $repository): Response
-    {
-        $figures = $repository->findAll();
-        return $this->render('./home.html.twig', [
-            'current_menu' => 'home',
-            'figures' => $figures
-        ]);
-    }
+	/**
+	 * @Route("/", name="home")
+	 *
+	 * @return Response
+	 */
+	public function index(FiguresRepository $repository): Response
+	{
+		$figures = $repository->findAll();
+
+		return $this->render('./home.html.twig', [
+			'current_menu' => 'home',
+			'figures' => $figures
+		]);
+	}
 }

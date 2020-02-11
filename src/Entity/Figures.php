@@ -83,7 +83,7 @@ class Figures
 	private $mainImgFile;
 
 	/**
-	 * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="figure")
+	 * @ORM\OneToMany(targetEntity="App\Entity\Video", mappedBy="figure", cascade={"remove"})
 	 */
 	private $videos;
 

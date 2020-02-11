@@ -28,7 +28,7 @@
 		{% if figure.pictures|length > 0 %}
 			<div class="photos">
 				{% for picture in figure.pictures %}
-					<div class="photo" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
+					<div class="photo miniature" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})">
 						<div class="actions">
 							<a class="edit" href="{{ path('admin.picture.edit', {id: picture.id, idFigure: figure.id}) }}">
 								<i class="fa fa-pencil" aria-hidden="true"></i>
@@ -36,7 +36,6 @@
 							<a class="btn btn-link delete" href="{{ path('admin.picture.delete', {id: picture.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ picture.id) }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cette photo ?');">
 								<i class="fa fa-trash" aria-hidden="true"></i>
 							</a>
-							{# {% include "admin/picture/_delete_form.html.twig" %} #}
 						</div>
 					</div>
 				{% endfor %}
@@ -44,9 +43,19 @@
 		{% endif %}
 
 		<div class="videos">
-			<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-			<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-			<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+			{% for video in figure.videos %}
+				<div class="miniature">
+					{{ video.url|raw }}
+					<div class="actions">
+						<a class="edit" href="{{ path('admin.video.edit', {id: video.id, idFigure: figure.id}) }}">
+							<i class="fa fa-pencil" aria-hidden="true"></i>
+						</a>
+						<a class="btn btn-link delete" href="{{ path('admin.video.delete', {id: video.id}) }}" data-delete data-token="{{ csrf_token('delete' ~ video.id) }}" onclick="return confirm('Êtes vous sûr de vouloir supprimer cette video ?');">
+							<i class="fa fa-trash" aria-hidden="true"></i>
+						</a>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 	</div>
 </div>

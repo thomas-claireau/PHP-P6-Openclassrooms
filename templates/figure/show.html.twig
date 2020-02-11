@@ -40,13 +40,15 @@
 			<div class="medias">
 				<div class="photos">
 					{% for picture in figure.pictures %}
-						<div class="photo" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
+						<div class="photo miniature" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
 					{% endfor %}
 				</div>
 				<div class="videos">
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					{% for video in figure.videos %}
+						<div class="miniature">
+							{{ video.url|raw }}
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

@@ -61,8 +61,11 @@
 </div>
 <div class="container mt-4 form-container">
 	<div class="row">
-		<div class="col">
+		<div class="col-md-8">
 			{{ form_row(form.pictureFiles) }}
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-primary addVideo" href="{{ path("admin.video.new", { 'idFigure': figure.id }) }}">Ajouter une video</a>
 		</div>
 	</div>
 	<div class="row">

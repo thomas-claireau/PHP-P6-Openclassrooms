@@ -5,6 +5,14 @@
 	padding: 0 0 30px 0;
 	position: relative;
 
+	.addVideo {
+		margin-top: 32px;
+
+		@media screen and (max-width: $break-tablet) {
+			margin: 0 0 20px 0;
+		}
+	}
+
 	.actions {
 		position: absolute;
 		top: 20px;
@@ -114,6 +122,7 @@
 
 		@media screen and (max-width: $break-header) {
 			flex-direction: column;
+			padding: 20px 40px;
 		}
 	}
 	.photos,
@@ -153,7 +162,7 @@
 			}
 
 			@media screen and (max-width: $break-header) {
-				margin-bottom: 10px;
+				margin-bottom: 70px;
 				margin-right: 10px;
 			}
 		}

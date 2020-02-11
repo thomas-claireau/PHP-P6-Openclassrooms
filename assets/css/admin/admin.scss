@@ -93,3 +93,14 @@
 		}
 	}
 }
+
+.admin-category-new {
+	.addCateg {
+		margin-top: 32px;
+
+		@media screen and (max-width: $break-tablet) {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+	}
+}

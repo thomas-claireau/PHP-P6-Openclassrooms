@@ -1,10 +1,10 @@
 {{ form_start(form) }}
-<div class="row d-flex" style="align-items: center">
-	<div class="col" style="padding: 0">
+<div class="row">
+	<div class="col-md-6 col-xs-12" style="padding: 0">
 		{{ form_row(form.name) }}
 	</div>
-	<div class="col">
-		<button class="btn btn-primary" style="position: relative;top: 8px;">
+	<div class="col-md-6 col-xs-12">
+		<button class="btn btn-primary addCateg">
 			{{ button_label|default('Créer une nouvelle catégorie') }}
 		</button>
 	</div>

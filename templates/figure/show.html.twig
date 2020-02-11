@@ -23,9 +23,9 @@
 		{% endif %}
 
 		{% if figure.pictures|length > 0 and (figure.mainImage is null or figure.mainImage is empty) %}
-			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') | imagine_filter('large') %}
 		{% elseif (figure.mainImage is not null) %}
-			{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') %}
+			{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('large') %}
 		{% endif %}
 
 		<div class="image" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
@@ -40,7 +40,7 @@
 			<div class="medias">
 				<div class="photos">
 					{% for picture in figure.pictures %}
-						<div class="photo miniature" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') }})"></div>
+						<div class="photo miniature" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }})"></div>
 					{% endfor %}
 				</div>
 				<div class="videos">

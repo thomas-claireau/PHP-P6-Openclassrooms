@@ -2,14 +2,15 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Figures;
 use App\Entity\Video;
+use App\Entity\Figures;
 use App\Form\VideoType;
 use App\Repository\VideoRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/admin/video")
@@ -79,15 +80,15 @@ class AdminVideoController extends AbstractController
 	 */
 	public function delete(Request $request, Video $video): Response
 	{
-		if ($this->isCsrfTokenValid('delete' . $video->getId(), $request->request->get('_token'))) {
+		$data = json_decode($request->getContent(), true);
+
+		if ($this->isCsrfTokenValid('delete' . $video->getId(), $data['_token'])) {
 			$entityManager = $this->getDoctrine()->getManager();
 			$entityManager->remove($video);
 			$entityManager->flush();
-			$this->addFlash('success', 'La vidéo a bien été supprimée');
-			return $this->redirectToRoute('home');
+			return new JsonResponse(['success' => 1]);
 		}
 
-		$this->addFlash('error', 'Un problème est survenu');
-		return $this->redirectToRoute('home');
+		return new JsonResponse(['error' => 'Une erreur est survenue'], 400);
 	}
 }

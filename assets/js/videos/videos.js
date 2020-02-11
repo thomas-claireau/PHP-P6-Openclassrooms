@@ -3,12 +3,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 	if (figureEdit) {
 		// Suppression d'une photo en ajax
-		const linksRemovePicture = figureEdit.querySelectorAll('.photos [data-delete]');
+		const linksRemoveVideo = figureEdit.querySelectorAll('.videos [data-delete]');
 
-		console.log(linksRemovePicture);
-
-		if (linksRemovePicture) {
-			linksRemovePicture.forEach((link) => {
+		if (linksRemoveVideo) {
+			linksRemoveVideo.forEach((link) => {
 				link.addEventListener('click', (e) => {
 					e.preventDefault();
 					fetch(link.getAttribute('href'), {
@@ -22,23 +20,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
 						.then((response) => response.json())
 						.then((data) => {
 							if (data.success) {
-								const imageRemove = link.parentNode.parentNode;
+								const videoRemove = link.parentNode.parentNode;
 
-								if (imageRemove) {
-									imageRemove.remove();
+								if (videoRemove) {
+									videoRemove.remove();
 								}
 
-								const containerPictures = figureEdit.querySelector(
-									'.medias .photos'
-								);
+								const containerVideos = figureEdit.querySelector('.medias .videos');
 
-								if (containerPictures) {
-									const allPictures = containerPictures.querySelectorAll(
-										'.photo'
-									);
+								if (containerVideos) {
+									const allVideos = containerVideos.querySelectorAll('.video');
 
-									if (allPictures && allPictures.length == 0) {
-										containerPictures.remove();
+									if (allVideos && allVideos.length == 0) {
+										containerVideos.remove();
 									}
 								}
 							} else {

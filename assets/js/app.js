@@ -16,6 +16,7 @@ import 'select2/dist/css/select2.css';
 
 import './figure/figure.js';
 import './picture/picture.js';
+import './videos/videos.js';
 
 // Add smooth scrolling on all links inside the navbar
 $('.scroll').on('click', function(event) {

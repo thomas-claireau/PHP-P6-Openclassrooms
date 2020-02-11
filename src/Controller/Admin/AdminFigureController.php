@@ -115,7 +115,7 @@ class AdminFigureController extends AbstractController
 			$figure->setMainImage(null);
 			$figure->setUpdatedAt(new \DateTime());
 			$this->em->flush();
-			$this->addFlash('success', 'La figure a bien été supprimée');
+			$this->addFlash('success', 'L\'image principale de la figure a bien été supprimée');
 		} else {
 			$this->addFlash('error', 'La figure n\'a pas été supprimée, un problème est survenu');
 			return $this->redirectToRoute('home');

@@ -23,23 +23,50 @@ class FiguresRepository extends ServiceEntityRepository
 	/**
 	 * @return Figures[]
 	 */
-	public function findAll(): array
+	public function findItems(int $index = 1): array
 	{
-		return $this->getQueryDesc()
+		return $this->getQueryDesc($index)
 			->getQuery()
 			->getResult();
 	}
 
-	public function findAllQuery(): Query
+	public function findMoreItems(int $index): array
 	{
-		return $this->getQueryDesc()
-			->getQuery();
+		if ($index !== 1) {
+			return $this->getQueryDesc($index)
+				->getQuery()
+				->getResult();
+		}
 	}
 
-	private function getQueryDesc()
+
+	private function getQueryDesc(int $index)
 	{
+		$total = $this->countAll();
+		$nbGroups = round($total / 15);
+		$start = 0;
+		$intervals = [];
+
+		for ($i = 1; $i <= $nbGroups; $i++) {
+			$intervals[$i] = [
+				'start' => $start
+			];
+
+			$start += 15;
+		}
+
+		$interval = $intervals[$index];
+
 		return $this->createQueryBuilder('p')
 			->orderBy('p.updated_at', 'DESC')
+			->setFirstResult($interval['start'])
 			->setMaxResults(15);
+	}
+
+	private function countAll()
+	{
+		return intval($this->createQueryBuilder('p')
+			->select('COUNT(p)')
+			->getQuery()->getSingleScalarResult());
 	}
 }

@@ -5,8 +5,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 		// Suppression d'une photo en ajax
 		const linksRemovePicture = figureEdit.querySelectorAll('.photos [data-delete]');
 
-		console.log(linksRemovePicture);
-
 		if (linksRemovePicture) {
 			linksRemovePicture.forEach((link) => {
 				link.addEventListener('click', (e) => {

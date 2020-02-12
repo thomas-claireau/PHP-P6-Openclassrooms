@@ -18,16 +18,22 @@ class FigureController extends AbstractController
 	/**
 	 * @var CommentRepository
 	 */
-	private $repository;
+	private $commentRepository;
+
+	/**
+	 * @var FiguresRepository
+	 */
+	private $figuresRepository;
 
 	/**
 	 * @var ObjectManager
 	 */
 	private $em;
 
-	public function __construct(CommentRepository $repository, ObjectManager $em)
+	public function __construct(CommentRepository $commentRepository, FiguresRepository $figuresRepository, ObjectManager $em)
 	{
-		$this->repository = $repository;
+		$this->commentRepository = $commentRepository;
+		$this->figuresRepository = $figuresRepository;
 		$this->em = $em;
 	}
 
@@ -39,7 +45,7 @@ class FigureController extends AbstractController
 	public function show(Figures $figure, string $slug, Request $request): Response
 	{
 		$user = $this->getUser();
-		$comments = $this->repository->findAll();
+		$comments = $this->commentRepository->findAll();
 
 		if ($user) {
 			$comment = new Comment();

@@ -13,6 +13,7 @@ use Symfony\Component\Serializer\Encoder\XmlEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
+
 class HomeController extends AbstractController
 {
 	/**
@@ -33,10 +34,12 @@ class HomeController extends AbstractController
 	public function index(): Response
 	{
 		$figures = $this->figuresRepository->findItems();
+		$nbGroups = round($this->figuresRepository->countAll() / 15);
 
 		return $this->render('./home.html.twig', [
 			'current_menu' => 'home',
-			'figures' => $figures
+			'figures' => $figures,
+			'nbGroups' => $nbGroups
 		]);
 	}
 
@@ -49,6 +52,7 @@ class HomeController extends AbstractController
 	{
 		$params = $request->attributes->get('_route_params');
 		$index = (int) $params['index'];
+		$nbGroups = round($this->figuresRepository->countAll() / 15);
 
 		$encoders = [new XmlEncoder(), new JsonEncoder()];
 		$normalizers = [new ObjectNormalizer()];
@@ -56,7 +60,24 @@ class HomeController extends AbstractController
 
 		if (is_int($index) && $index > 1) {
 			$moreFigures = $serializer->normalize($this->figuresRepository->findMoreItems($index), 'json');
-			return new JsonResponse(json_encode($moreFigures), 200, array('Content-Type' => 'application/json'));
+			$htmlData = [];
+
+			if ($moreFigures) {
+				foreach ($moreFigures as $figure) {
+					array_push(
+						$htmlData,
+						$this->renderView('./figure/_figure.html.twig', [
+							'current_menu' => 'home',
+							'figure' => $figure,
+							'nbGroups' => $nbGroups,
+						])
+					);
+				}
+			}
+
+			return new JsonResponse([
+				'html' => $htmlData,
+			], 200);
 		} else {
 			return new JsonResponse(['error' => 'Une erreur est survenue'], 400);
 		}

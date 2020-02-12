@@ -20,16 +20,37 @@ window.addEventListener('DOMContentLoaded', (event) => {
 					.then((response) => response.json())
 					.then((data) => {
 						if (data) {
-							data.forEach((item) => {
-								const name = data.name ? data.name : '';
-							});
+							data = data.html;
+							const containerFigures = home.querySelector('.container-figures');
+
+							if (containerFigures) {
+								data.forEach((item) => {
+									const col = document.createElement('div');
+									col.classList.add('col');
+									col.innerHTML = item;
+									containerFigures.appendChild(col);
+								});
+							}
 						} else {
 							alert(data.error);
 						}
 					})
-					.catch((e) => alert(e))
+					.catch((e) => console.error(e))
 					.finally(() => {
 						linkLoadMoreContent.classList.remove('load');
+						const limit = home.querySelector('#limit').value;
+
+						let href = linkLoadMoreContent.href;
+						href = href.split('/index/');
+						const index = parseInt(href[1], 10) + 1;
+
+						if (limit >= index) {
+							href[1] = index;
+							href = href.join('/index/');
+							linkLoadMoreContent.href = href;
+						} else {
+							linkLoadMoreContent.remove();
+						}
 					});
 			});
 		}

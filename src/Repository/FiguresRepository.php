@@ -39,6 +39,13 @@ class FiguresRepository extends ServiceEntityRepository
 		}
 	}
 
+	public function countAll()
+	{
+		return intval($this->createQueryBuilder('p')
+			->select('COUNT(p)')
+			->getQuery()->getSingleScalarResult());
+	}
+
 
 	private function getQueryDesc(int $index)
 	{
@@ -61,12 +68,5 @@ class FiguresRepository extends ServiceEntityRepository
 			->orderBy('p.updated_at', 'DESC')
 			->setFirstResult($interval['start'])
 			->setMaxResults(15);
-	}
-
-	private function countAll()
-	{
-		return intval($this->createQueryBuilder('p')
-			->select('COUNT(p)')
-			->getQuery()->getSingleScalarResult());
 	}
 }

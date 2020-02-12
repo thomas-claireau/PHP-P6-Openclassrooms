@@ -26,6 +26,9 @@
 		<div class="actions">
 			<a href="{{ path("home.index", { index: 2 }) }}" class="btn btn-lg btn-primary mt-4 load-more">
 				Charger plus de figures
+				<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
 			</a>
 			{% if app.user %}
 				<a href="{{ path('admin.figure.new') }}" class="btn btn-lg btn-success mt-4">

@@ -8,6 +8,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 		if (linkLoadMoreContent) {
 			linkLoadMoreContent.addEventListener('click', (e) => {
 				e.preventDefault();
+				linkLoadMoreContent.classList.add('load');
+
 				fetch(linkLoadMoreContent.getAttribute('href'), {
 					method: 'GET',
 					headers: {
@@ -19,13 +21,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 					.then((data) => {
 						if (data) {
 							data.forEach((item) => {
-								console.log(item);
+								const name = data.name ? data.name : '';
 							});
 						} else {
 							alert(data.error);
 						}
 					})
-					.catch((e) => alert(e));
+					.catch((e) => alert(e))
+					.finally(() => {
+						linkLoadMoreContent.classList.remove('load');
+					});
 			});
 		}
 	}

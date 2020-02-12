@@ -36,54 +36,10 @@ class FiguresRepository extends ServiceEntityRepository
 			->getQuery();
 	}
 
-	public function removeMainImg($id): Query
-	{
-		return $this->getQueryRemove($id)
-			->getQuery()
-			->execute();
-	}
-
-	// /**
-	//  * @return Figures[] Returns an array of Figures objects
-	//  */
-	/*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-	/*
-    public function findOneBySomeField($value): ?Figures
-    {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 	private function getQueryDesc()
 	{
 		return $this->createQueryBuilder('p')
 			->orderBy('p.updated_at', 'DESC')
 			->setMaxResults(15);
-	}
-
-	private function getQueryRemove($id)
-	{
-		return $this->createQueryBuilder('p')
-			->delete('MainImage')
-			->from(Figures::class, 'f')
-			->where('p.id = :id')
-			->setParameter('id', $id);
 	}
 }

@@ -14,25 +14,28 @@
 		{% block stylesheets %}{% endblock %}
 	</head>
 
-	<body class="{{ current_menu is defined ? current_menu|replace({'.': '-'}) : '' }} {{ app.user ? 'admin' : '' }}" data-spy="scroll" data-target=".header" data-offset="-50"></body>
+	<body class="{{ current_menu is defined ? current_menu|replace({'.': '-'}) : '' }} {{ app.user ? 'admin' : '' }}" data-spy="scroll" data-target=".header" data-offset="-50">
 
-	{% include "navbar.html.twig" %}
+		{% include "navbar.html.twig" %}
 
-	{% if current_menu is defined %}
-		{% if current_menu != 'login' and current_menu != 'register' %}
+		{% if current_menu is defined %}
+			{% if current_menu != 'login' and current_menu != 'register' %}
+				{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
+			{% endif %}
+		{% else %}
 			{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
 		{% endif %}
-	{% else %}
-		{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
-	{% endif %}
 
-	<section class="py-5">
-		<div class="container{% if current_menu is defined and current_menu == 'home' %}-fluid{% endif %} "> {% block body %}{% endblock %}
-
+		<section class="py-5">
+			<div class="container{% if current_menu is defined and current_menu == 'home' %}-fluid{% endif %} "> 
+				{% block body %}{% endblock %}
 			</div>
 		</section>
 
 		{% block javascripts %}{% endblock %}
 		{{ encore_entry_script_tags('app') }}
-	</html>
-</body></html>
+
+		{% include "footer.html.twig" %}
+		
+	</body>
+</html>

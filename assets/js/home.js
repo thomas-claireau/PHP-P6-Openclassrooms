@@ -40,6 +40,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
 						linkLoadMoreContent.classList.remove('load');
 						const limit = home.querySelector('#limit').value;
 
+						const scrollBottom = home.querySelector('#figures .scroll');
+
+						if (scrollBottom) {
+							scrollBottom.classList.remove('hide');
+						}
+
 						let href = linkLoadMoreContent.href;
 						href = href.split('/index/');
 						const index = parseInt(href[1], 10) + 1;

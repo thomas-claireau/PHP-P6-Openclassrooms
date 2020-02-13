@@ -35,7 +35,7 @@ class FiguresRepository extends ServiceEntityRepository
 		if ($index !== 1) {
 			return $this->getQueryDesc($index)
 				->getQuery()
-				->getResult();
+				->getResult(Query::HYDRATE_ARRAY);
 		}
 	}
 

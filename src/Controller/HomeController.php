@@ -2,16 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Figures;
 use App\Repository\FiguresRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Encoder\XmlEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 
 class HomeController extends AbstractController
@@ -54,16 +51,16 @@ class HomeController extends AbstractController
 		$index = (int) $params['index'];
 		$nbGroups = round($this->figuresRepository->countAll() / 15);
 
-		$encoders = [new XmlEncoder(), new JsonEncoder()];
-		$normalizers = [new ObjectNormalizer()];
-		$serializer = new Serializer($normalizers, $encoders);
-
 		if (is_int($index) && $index > 1) {
-			$moreFigures = $serializer->normalize($this->figuresRepository->findMoreItems($index), 'json');
+			$moreFigures = (array) $this->figuresRepository->findMoreItems($index);
 			$htmlData = [];
 
 			if ($moreFigures) {
 				foreach ($moreFigures as $figure) {
+					$figure = $this->getDoctrine()
+						->getRepository(Figures::class)
+						->find($figure['id']);
+
 					array_push(
 						$htmlData,
 						$this->renderView('./figure/_figure.html.twig', [

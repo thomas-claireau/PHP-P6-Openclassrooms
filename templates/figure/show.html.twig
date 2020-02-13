@@ -107,9 +107,12 @@
 			{% endif %}
 
 			{% if comments is defined %}
-				{% for comment in comments %}
-					{% include "comment.twig" with {'comment': comment} %}
-				{% endfor %}
+				<div class="comments">
+					<input type="hidden" value="{{ nbGroups }}" id="limit">
+					{% for comment in comments %}
+						{% include "comment.html.twig" with {'comment': comment} %}
+					{% endfor %}
+				</div>
 			{% endif %}
 			<a href="{{ path("figure.commentaire.index", { id: figure.id, index: 2 }) }}" class="btn btn-lg btn-primary mt-4 load-more">
 				Charger plus de commentaires

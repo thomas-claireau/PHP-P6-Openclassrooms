@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use App\Entity\Comment;
+use Doctrine\ORM\Query;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -35,7 +36,7 @@ class CommentRepository extends ServiceEntityRepository
 		if ($index !== 1) {
 			return $this->getQueryDesc($index)
 				->getQuery()
-				->getResult();
+				->getResult(Query::HYDRATE_ARRAY);
 		}
 	}
 

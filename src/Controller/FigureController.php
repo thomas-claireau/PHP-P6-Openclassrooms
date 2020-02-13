@@ -52,6 +52,7 @@ class FigureController extends AbstractController
 	{
 		$user = $this->getUser();
 		$comments = $this->commentRepository->findItems();
+		$nbGroups = round($this->commentRepository->countAll() / 10);
 
 		if ($user) {
 			$comment = new Comment();
@@ -70,7 +71,8 @@ class FigureController extends AbstractController
 
 				return $this->redirectToRoute('figure.show', [
 					'id' => $figure->getId(),
-					'slug' => $figure->getSlug()
+					'slug' => $figure->getSlug(),
+					'nbGroups' => $nbGroups,
 				], 301);
 			}
 		}
@@ -85,12 +87,14 @@ class FigureController extends AbstractController
 				'date_is_same' => $figure->dateIsSame(),
 				'comments' => $comments,
 				'form' => isset($form) && $form ? $form->createView() : false,
+				'nbGroups' => $nbGroups,
 			]);
 		}
 
 		return $this->render('figure/show.html.twig', [
 			'id' => $figure->getId(),
-			'slug' => $figure->getSlug()
+			'slug' => $figure->getSlug(),
+			'nbGroups' => $nbGroups,
 		]);
 	}
 
@@ -105,25 +109,19 @@ class FigureController extends AbstractController
 		$index = (int) $params['index'];
 		$nbGroups = round($this->commentRepository->countAll() / 10);
 
-		// $encoders = [new XmlEncoder(), new JsonEncoder()];
-		// $defaultContext = [
-		// 	AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
-		// 		return $object->getId();
-		// 	},
-		// ];
-		// $normalizers = [new ObjectNormalizer];
-		// $normalizers = [new ObjectNormalizer()];
-		// $serializer = new Serializer($normalizers, $encoders);
-
 		if (is_int($index) && $index > 1) {
 			$moreComments = (array) $this->commentRepository->findMoreItems($index);
 			$htmlData = [];
 
 			if ($moreComments) {
 				foreach ($moreComments as $comment) {
+					$comment = $this->getDoctrine()
+						->getRepository(Comment::class)
+						->find($comment['id']);
+
 					array_push(
 						$htmlData,
-						$this->renderView('./comment.twig', [
+						$this->renderView('./comment.html.twig', [
 							'comment' => $comment,
 							'nbGroups' => $nbGroups,
 						])

@@ -15,6 +15,7 @@ import 'select2';
 import 'select2/dist/css/select2.css';
 
 import './home.js';
+import './figure/comment.js';
 import './figure/figure.js';
 import './picture/picture.js';
 import './videos/videos.js';

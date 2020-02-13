@@ -111,6 +111,12 @@
 					{% include "comment.twig" with {'comment': comment} %}
 				{% endfor %}
 			{% endif %}
+			<a href="{{ path("figure.commentaire.index", { id: figure.id, index: 2 }) }}" class="btn btn-lg btn-primary mt-4 load-more">
+				Charger plus de commentaires
+				<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</a>
 		</div>
 	</div>
 

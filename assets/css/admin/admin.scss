@@ -1,0 +1,106 @@
+.admin-figure-index,
+.admin-category-new,
+.admin-category-index,
+.admin-category-edit,
+.admin-picture-edit,
+.admin-video-new,
+.admin-video-edit {
+	.masthead {
+		display: none;
+	}
+}
+
+.admin-category-new,
+.admin-category-index,
+.admin-category-edit,
+.admin-picture-edit,
+.admin-video-new,
+.admin-video-edit {
+	padding-top: 80px;
+}
+
+.admin-figure-edit,
+.admin-figure-new {
+	@import '../figures/show.scss';
+
+	.form-container {
+		position: relative;
+		width: 60%;
+
+		.categories {
+			> .form-group {
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+				align-items: flex-start;
+				padding-left: 19px;
+				margin-bottom: 40px;
+
+				.select2 {
+					width: 250px !important;
+				}
+			}
+		}
+
+		button.edit,
+		button.delete {
+			position: absolute;
+			bottom: 0;
+
+			@media screen and (max-width: $break-tablet) {
+			}
+		}
+
+		button.edit {
+			right: 20px;
+
+			@media screen and (max-width: $break-tablet) {
+				right: auto;
+				left: 60%;
+				transform: translateX(-50%);
+			}
+
+			@media screen and (max-width: $break-tablet - 200) {
+				left: 65%;
+			}
+			@media screen and (max-width: $break-tablet - 300) {
+				left: 75%;
+			}
+		}
+
+		button.delete {
+			right: 120px;
+
+			@media screen and (max-width: $break-tablet) {
+				right: auto;
+				left: 40%;
+				transform: translateX(-50%);
+			}
+			@media screen and (max-width: $break-tablet - 200) {
+				left: 35%;
+			}
+			@media screen and (max-width: $break-tablet - 300) {
+				left: 25%;
+			}
+		}
+
+		@media screen and (max-width: $break-medium) {
+			width: 80%;
+		}
+
+		@media screen and (max-width: $break-tablet) {
+			width: auto;
+		}
+	}
+}
+
+.admin-category-new {
+	.addCateg {
+		margin-top: 32px;
+
+		@media screen and (max-width: $break-tablet) {
+			margin-top: 0;
+			margin-bottom: 10px;
+		}
+	}
+}

@@ -1,6 +1,9 @@
 wireframes.pdf
 CDC.pdf
 
+# Public image
+public/images/figures
+
 # Files ignored
 composer.lock
 package-lock.json

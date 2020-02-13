@@ -7,7 +7,28 @@
 {% block body %}
 
 	<div class="figure-container col text-center container">
-		<div class="image" style="background-image: url({{asset('build/images/home_image.jpg')}});">
+		{% if app.user %}
+			<div class="actions">
+				<a class="edit" href="{{ path('admin.figure.edit', {id: figure.id}) }}">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+				</a>
+				<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+					<button class="btn btn-link delete">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</form>
+			</div>
+		{% endif %}
+
+		{% if figure.pictures|length > 0 and (figure.mainImage is null or figure.mainImage is empty) %}
+			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') | imagine_filter('large') %}
+		{% elseif (figure.mainImage is not null) %}
+			{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('large') %}
+		{% endif %}
+
+		<div class="image" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
 			<h1>
 				{{figure.name}}
 			</h1>
@@ -18,14 +39,16 @@
 		<div class="collapse" id="mediaCollapse">
 			<div class="medias">
 				<div class="photos">
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					{% for picture in figure.pictures %}
+						<div class="photo miniature" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }})"></div>
+					{% endfor %}
 				</div>
 				<div class="videos">
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-					<div style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
+					{% for video in figure.videos %}
+						<div class="miniature">
+							{{ video.url|raw }}
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
@@ -35,21 +58,69 @@
 			</div>
 		</div>
 		<div class="btn-toolbar infos justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
-			<div class="btn-group mr-2" role="group" aria-label="First group">
-				<a href="#" class="btn btn-primary">Créée le
-					{{ figure.createdAt|date("d/m/Y") }}</a>
+			<div class="btn-group mr-2" role="group">
+				<a href="#" class="btn btn-info">
+					Créée le
+					{{ figure.createdAt|date("d/m/Y") }}
+				</a>
 			</div>
-			<div class="btn-group mr-2" role="group" aria-label="Second group">
-				<a href="#" class="btn btn-primary">Groupe</a>
-			</div>
-			{% if date_is_same %}
-				<div class="btn-group" role="group" aria-label="Third group">
-					<a href="#" class="btn btn-primary">Modifiée le
-						{{ figure.updatedAt|date("d/m/Y") }}</a>
+			{% for category in figure.categories %}
+				<div class="btn-group mr-2" role="group">
+					<a href="#" class="btn btn-info">
+						{{category.name}}
+					</a>
+				</div>
+			{% endfor %}
+			{% if not date_is_same %}
+				<div class="btn-group" role="group">
+					<a href="#" class="btn btn-info">
+						Modifiée le
+						{{ figure.updatedAt|date("d/m/Y") }}
+					</a>
 				</div>
 			{% endif %}
 		</div>
-		{% include "comment.twig" %}
+		<div class="comments-container">
+			<h2>
+				Commentaires
+			</h2>
+
+			{% include "flash.html.twig" %}
+
+			{% if app.user and form is defined %}
+
+
+				{{ form_start(form) }}
+
+				<div class="row">
+					<div class="col">
+						{{ form_row(form.content) }}
+					</div>
+				</div>
+
+				<button class="btn btn-primary">
+					{{ button|default('Ajouter un commentaire') }}
+				</button>
+
+				{{ form_end(form) }}
+
+			{% endif %}
+
+			{% if comments is defined %}
+				<div class="comments">
+					<input type="hidden" value="{{ nbGroups }}" id="limit">
+					{% for comment in comments %}
+						{% include "comment.html.twig" with {'comment': comment} %}
+					{% endfor %}
+				</div>
+			{% endif %}
+			<a href="{{ path("figure.commentaire.index", { id: figure.id, index: 2 }) }}" class="btn btn-lg btn-primary mt-4 load-more">
+				Charger plus de commentaires
+				<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</a>
+		</div>
 	</div>
 
 {% endblock body %}

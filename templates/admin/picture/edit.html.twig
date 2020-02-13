@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Gérer les photos' %}
+{% block h1 'Photo' %}
+{% block subtitle 'Snow Tricks' %}
+
+{% block body %}
+	<div class="row container">
+		<div class="col-md-8 col-xs-12">
+			<h1>Modifier une photo</h1>
+			{{ include('admin/picture/_form.html.twig', {'button_label': 'Modifier', 'link_figure': path('admin.figure.delete', {id: figure.id})}) }}
+		</div>
+		<div class="col-md-4 col-xs-12">
+			<img class="img-thumbnail" src="{{ vich_uploader_asset(picture, 'imageFile') }}" alt="">
+		</div>
+	</div>
+
+{% endblock %}

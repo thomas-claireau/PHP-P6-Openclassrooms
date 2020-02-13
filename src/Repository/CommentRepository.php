@@ -2,9 +2,11 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Comment;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,37 +16,66 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class CommentRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Comment::class);
-    }
+	public function __construct(ManagerRegistry $registry)
+	{
+		parent::__construct($registry, Comment::class);
+	}
 
-    // /**
-    //  * @return Comment[] Returns an array of Comment objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+	/**
+	 * @return Comment[]
+	 */
+	public function findItems(int $index = 1): array
+	{
+		return $this->getQueryDesc($index)
+			->getQuery()
+			->getResult();
+	}
 
-    /*
-    public function findOneBySomeField($value): ?Comment
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
+	public function findMoreItems(int $index): array
+	{
+		if ($index !== 1) {
+			return $this->getQueryDesc($index)
+				->getQuery()
+				->getResult(Query::HYDRATE_ARRAY);
+		}
+	}
+
+	public function countAll()
+	{
+		return intval($this->createQueryBuilder('p')
+			->select('COUNT(p)')
+			->getQuery()->getSingleScalarResult());
+	}
+
+	private function getQueryDesc(int $index)
+	{
+		$total = $this->countAll();
+		$nbResultsPerPage = 10;
+
+
+		$nbGroups = round($total / $nbResultsPerPage);
+		$start = 0;
+		$intervals = [];
+
+		if (!$total || !$nbGroups) {
+			return $this->createQueryBuilder('p')
+				->orderBy('p.created_at', 'DESC')
+				->setMaxResults($nbResultsPerPage);
+		}
+
+		for ($i = 1; $i <= $nbGroups; $i++) {
+			$intervals[$i] = [
+				'start' => $start
+			];
+
+			$start += $nbResultsPerPage;
+		}
+
+		$interval = $intervals[$index];
+
+		return $this->createQueryBuilder('p')
+			->orderBy('p.created_at', 'DESC')
+			->setFirstResult($interval['start'])
+			->setMaxResults($nbResultsPerPage);
+	}
 }

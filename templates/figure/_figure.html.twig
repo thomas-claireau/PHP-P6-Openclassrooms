@@ -1,15 +1,33 @@
 <a href="{{ path('figure.show', { id: figure.id, slug: figure.slug }) }}" class="card mt-4 figure">
+	{% if figure.pictures|length > 0 and (figure.mainImage is null or figure.mainImage is empty) %}
+		{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+	{% elseif (figure.mainImage is not null) %}
+		{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('thumb') %}
+	{% endif %}
 
-	<div class="card-img-top" style="background-image: url({{asset('build/images/empty.jpg')}})"></div>
-
+	<div class="card-img-top" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }})"></div>
 	<div class="card-body">
 		<h5 class="card-title">
 			<p>
 				{{ figure.name }}
 			</p>
 		</h5>
-		<p class="card-text">
-			{{ figure.shortDescription}}
-		</p>
+		{% if app.user %}
+			<div class="actions">
+				<form action="{{ path('admin.figure.edit', {id: figure.id}) }}" style="display: inline-block">
+					<button class="btn btn-link edit">
+						<i class="fa fa-pencil" aria-hidden="true"></i>
+					</button>
+				</form>
+				<form method="post" action="{{ path('admin.figure.delete', {id: figure.id}) }}" style="display: inline-block" onsubmit="return confirm('Vous êtes sur le point de supprimer une figure. Êtes vous vraiment sûr ?')">
+					<input type="hidden" name="_method" value="DELETE">
+					<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ figure.id) }}">
+					<button class="btn btn-link delete">
+						<i class="fa fa-trash" aria-hidden="true"></i>
+					</button>
+				</form>
+			</div>
+		{% endif %}
+
 	</div>
 </a>

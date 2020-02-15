@@ -30,7 +30,7 @@ Le projet est livré sur Packagist sans base de données. Cela signifie qu'il fa
 
 #### Injection SQL et structure du projet
 
-Pour obtenir une structure similaire à mon projet au niveau de la base de données, je vous joins aussi dans le dossier `~src/Migrations/` les versions de migrations que j'ai utilisées. La dernière version vous permet de recréer toute la structure de la base. Vous pouvez l'utiliser en effectuant la commande suivante, à la racine du projet :
+Pour obtenir une structure similaire à mon projet au niveau de la base de données, je vous joins aussi dans le dossier `~src/Migrations/` les versions de migrations que j'ai utilisées. Vous pouvez donc recréer la base de données en effectuant la commande suivante, à la racine du projet :
 
 ```text
 php bin/console doctrine:migrations:migrate

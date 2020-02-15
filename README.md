@@ -22,29 +22,15 @@ Installez ensuite les dépendances front du projet. Placez-vous à la racine du 
 npm install
 ```
 
-### Serveur de développement
-
-Pour lancer le serveur de développement, effectuez un `npm run dev-server`, encore une fois à la racine du projet.
-
-### Site en production
-
-Pour voir une version du site en production, suivez l'[url suivante](https://recette.thomas-claireau.fr).
-
-### Envoi des mails
-
-Si vous souhaitez utiliser un serveur de mail afin d'envoyer des mails, vous pouvez le configurer dans le fichier `.env` à la racine du projet, dans la partie `MAILER_URL`
-
-Sachez que vous pouvez aussi [maildev](https://www.npmjs.com/package/maildev) pour simuler l'envoi des mails.
-
 ### Remarque
 
 #### Accès base de données
 
-Le projet est livré sur Packagist sans base de données. Cela signifie qu'il faut que vous ajoutiez votre configuration, encore une fois dans le fichier `.env`, dans la partie `DATABASE_URL`.
+Le projet est livré sur Packagist sans base de données. Cela signifie qu'il faut que vous ajoutiez votre configuration, dans le fichier `.env`, dans la partie `DATABASE_URL`.
 
 #### Injection SQL et structure du projet
 
-Pour obtenir une structure similaire à mon projet au niveau de la base de données, je vous joins aussi dans le dossier `~src/Migrations/` les versions de migrations que j'ai utilisé. La dernière version vous permet de recréer toute la structure de la base. Vous pouvez l'utiliser en effectuant la commande suivante, à la racine du projet :
+Pour obtenir une structure similaire à mon projet au niveau de la base de données, je vous joins aussi dans le dossier `~src/Migrations/` les versions de migrations que j'ai utilisées. La dernière version vous permet de recréer toute la structure de la base. Vous pouvez l'utiliser en effectuant la commande suivante, à la racine du projet :
 
 ```text
 php bin/console doctrine:migrations:migrate
@@ -55,6 +41,23 @@ Après avoir créer votre base de données, vous pouvez également injecter un j
 ```text
 php bin/console doctrine:fixtures:load
 ```
+
+### Lancer le projet
+
+A la racine du projet :
+
+-   Pour lancer le serveur de développement, effectuez un `npm run dev-server`.
+-   Pour lancer le serveur de symfony, effectuez un `php bin/console server:run`.
+
+### Site en production
+
+Pour voir une version du site en production, suivez l'[url suivante](https://recette.thomas-claireau.fr).
+
+### Envoi des mails
+
+Si vous souhaitez utiliser un serveur de mail afin d'envoyer des mails, vous pouvez le configurer dans le fichier `.env` à la racine du projet, dans la partie `MAILER_URL`
+
+Sachez que vous pouvez aussi utiliser [maildev](https://www.npmjs.com/package/maildev) pour simuler l'envoi des mails.
 
 ## Contexte
 

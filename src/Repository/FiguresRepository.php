@@ -20,6 +20,12 @@ class FiguresRepository extends ServiceEntityRepository
 		parent::__construct($registry, Figures::class);
 	}
 
+	public function resetIndex()
+	{
+		$connection = $this->getEntityManager()->getConnection();
+		$connection->exec("ALTER TABLE figures AUTO_INCREMENT = 1;");
+	}
+
 	/**
 	 * @return Figures[]
 	 */

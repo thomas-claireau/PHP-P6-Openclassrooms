@@ -21,6 +21,12 @@ class CommentRepository extends ServiceEntityRepository
 		parent::__construct($registry, Comment::class);
 	}
 
+	public function resetIndex()
+	{
+		$connection = $this->getEntityManager()->getConnection();
+		$connection->exec("ALTER TABLE comment AUTO_INCREMENT = 1;");
+	}
+
 	/**
 	 * @return Comment[]
 	 */

@@ -1,6 +1,24 @@
 {
+	"name": "Thomas Claireau - Développez de A à Z le site communautaire SnowTricks",
+	"version": "0.9.0",
+	"description": "package manager for my project",
 	"type": "project",
-	"license": "proprietary",
+	"keywords": [
+		"symfony",
+		"web",
+		"application",
+		"php",
+		"mvc",
+		"blog"
+	],
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Thomas Claireau",
+			"email": "thomas.claireau@gmail.com",
+			"role": "Fullstack web developer"
+		}
+	],
 	"require": {
 		"php": "^7.1.3",
 		"ext-ctype": "*",
@@ -85,5 +103,10 @@
 			"allow-contrib": false,
 			"require": "4.2.*"
 		}
+	},
+	"support": {
+		"email": "thomas.claireau@gmail.com",
+		"issues": "https://github.com/thomas-claireau/PHP-P6-Openclassrooms/issues",
+		"source": "https://github.com/thomas-claireau/PHP-P6-Openclassrooms"
 	}
 }

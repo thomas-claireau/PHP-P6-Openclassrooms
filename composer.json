@@ -20,7 +20,6 @@
 		}
 	],
 	"require": {
-		"thomas-claireau/snowtricks": "dev-master@dev",
 		"php": "^7.1.3",
 		"ext-ctype": "*",
 		"ext-iconv": "*",

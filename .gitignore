@@ -2,7 +2,13 @@ wireframes.pdf
 CDC.pdf
 
 # Public image
-public/images/figures
+public/images/figures/*
+!public/images/figures/image-1.jpg
+!public/images/figures/image-2.jpg
+!public/images/figures/image-3.jpg
+!public/images/figures/image-4.jpg
+!public/images/figures/image-5.jpg
+!public/images/figures/image-6.jpg
 
 # Files ignored
 composer.lock

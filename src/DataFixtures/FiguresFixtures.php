@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Category;
 use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Video;
@@ -35,6 +36,9 @@ class FiguresFixtures extends Fixture
 	{
 		$faker = Factory::create('fr_FR');
 
+		$categories = ['Grabs', 'Rotations', 'Flips', 'Slides'];
+		$categoriesObj = [];
+
 		$figures = ['Melancholie', 'Mute', 'Style week', '540 rotation', 'Indy', 'Stalefish', 'Japan Air', 'Nose grab', '180 rotation', 'Sad', 'Tail grab', '900 rotation', 'Seat Belt', '360 rotation', 'Japan', '720 rotation', 'Backside Air', 'Truck driver', 'Big foot', 'Slide', 'Rocket Air', 'Flip', 'Method Air'];
 
 		$videos = [
@@ -61,6 +65,13 @@ class FiguresFixtures extends Fixture
 		$user->setActif(1);
 		$manager->persist($user);
 
+		foreach ($categories as $key => $item) {
+			$category = new Category();
+			$category->setName($item);
+			$manager->persist($category);
+			array_push($categoriesObj, $category);
+		}
+
 		foreach ($figures as $key => $item) {
 			$figure = new Figures();
 
@@ -70,14 +81,13 @@ class FiguresFixtures extends Fixture
 			$figure->setCreatedAt($date);
 			$figure->setUpdatedAt($date);
 			$figure->setDescription($faker->sentences(15, true));
-			$figure->setMainImage('image-' . random_int(1, 6));
+			$figure->addCategory($categoriesObj[random_int(0, 3)]);
 			$manager->persist($figure);
-
 
 			for ($i = 1; $i <= 3; $i++) {
 				$picture = new Picture();
 				$picture->setFigures($figure);
-				$picture->setFilename('image-' . random_int(1, 6));
+				$picture->setFilename('image-' . random_int(1, 6) . '.jpg');
 				$picture->setUpdatedAt($date);
 				$manager->persist($picture);
 

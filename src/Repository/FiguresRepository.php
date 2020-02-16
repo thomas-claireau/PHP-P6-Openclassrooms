@@ -52,6 +52,11 @@ class FiguresRepository extends ServiceEntityRepository
 			->getQuery()->getSingleScalarResult());
 	}
 
+	public function getLastId()
+	{
+		return $this->findOneBy([], ['id' => 'desc']);
+	}
+
 
 	private function getQueryDesc(int $index)
 	{

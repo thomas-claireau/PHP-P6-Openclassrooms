@@ -52,8 +52,11 @@ class AdminFigureController extends AbstractController
 			return $this->redirectToRoute('home');
 		}
 
+		$lastId = $this->repository->getLastId()->getId();
+
 		return $this->render('admin/figure/new.html.twig', [
 			'figure' => $figure,
+			'idFigure' => $lastId + 1,
 			'form'     => $form->createView(),
 			'current_menu' => 'admin.figure.new',
 		]);

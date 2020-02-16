@@ -27,7 +27,7 @@
 			{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
 		{% endif %}
 
-		<section class="py-5">
+		<section id="page-body" class="py-5">
 			<div class="container{% if current_menu is defined and current_menu == 'home' %}-fluid{% endif %} "> {% block body %}{% endblock %}
 				</div>
 			</section>

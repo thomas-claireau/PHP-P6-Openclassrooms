@@ -82,6 +82,7 @@ class FiguresFixtures extends Fixture
 			$figure->setUpdatedAt($date);
 			$figure->setDescription($faker->sentences(15, true));
 			$figure->addCategory($categoriesObj[random_int(0, 3)]);
+			$figure->setMainImage('image-' . random_int(1, 6) . '.jpg');
 			$manager->persist($figure);
 
 			for ($i = 1; $i <= 3; $i++) {

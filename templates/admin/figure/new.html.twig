@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title 'Gérer les figures' %}
+{% block h1 'Créer une nouvelle figure' %}
+{% block subtitle 'Snow Tricks' %}
+
+{% block body %}
+	<div class="figure-container col text-center container">
+		{{ include('admin/figure/_form_new.html.twig', {button: 'Créer', 'idFigure': idFigure}) }}
+	</div>
+{% endblock %}

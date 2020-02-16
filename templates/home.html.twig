@@ -6,19 +6,41 @@
 
 {% block body %}
 
-<div id="figures" class="col text-center">
-    <h2>Les dernières figures</h2>
-    <div class="row flex">
-        <div class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-2 row-cols-1">
-            {% for figure in figures %}
-                <div class="col">
-                    {% include "figure/_figure.html.twig" %}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+	<div id="figures" class="col text-center">
+		<h2>
+			Les dernières figures
+		</h2>
 
-    <a href="#" class="btn btn-lg btn-primary mt-4">Charger plus de figures</a>
-</div>
+		{% include "flash.html.twig" %}
+
+		<div class="row flex">
+			<div class="row row-cols-xl-5 row-cols-lg-3 row-cols-md-2 row-cols-1 container-figures">
+				<input type="hidden" value="{{ nbGroups }}" id="limit">
+				{% for figure in figures %}
+					<div class="col">
+						{% include "figure/_figure.html.twig" %}
+					</div>
+				{% endfor %}
+			</div>
+			<a class="scroll hide" href="#figures">
+				<span></span>
+			</a>
+		</div>
+
+		<div class="actions">
+			<a href="{{ path("home.index", { index: 2 }) }}" class="btn btn-lg btn-primary mt-4 load-more">
+				Charger plus de figures
+				<div class="spinner-border" role="status">
+					<span class="sr-only">Loading...</span>
+				</div>
+			</a>
+			{% if app.user %}
+				<a href="{{ path('admin.figure.new') }}" class="btn btn-lg btn-success mt-4">
+					Créer une nouvelle figure
+				</a>
+			{% endif %}
+		</div>
+
+	</div>
 
 {% endblock body %}

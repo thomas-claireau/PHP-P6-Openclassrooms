@@ -1,0 +1,42 @@
+body.login,
+body.register {
+	padding-top: 100px;
+
+	h1 {
+		padding-bottom: 50px;
+	}
+
+	.container-form {
+		width: 30%;
+
+		> form {
+			padding: 20px;
+			border: 1px solid #ced4da;
+		}
+
+		.actions {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+
+			.forgot-password {
+				margin-bottom: 15px;
+			}
+		}
+
+		@media screen and (max-width: $break-large) {
+			width: 60%;
+		}
+
+		@media screen and (max-width: $break-tablet) {
+			width: auto;
+		}
+	}
+}
+
+body.register {
+	.actions a {
+		margin-top: 15px;
+	}
+}

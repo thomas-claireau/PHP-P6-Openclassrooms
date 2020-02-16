@@ -1,5 +1,15 @@
 wireframes.pdf
 CDC.pdf
+deploy
+
+# Public image
+public/images/figures/*
+!public/images/fixtures/image-1.jpg
+!public/images/fixtures/image-2.jpg
+!public/images/fixtures/image-3.jpg
+!public/images/fixtures/image-4.jpg
+!public/images/fixtures/image-5.jpg
+!public/images/fixtures/image-6.jpg
 
 # Files ignored
 composer.lock

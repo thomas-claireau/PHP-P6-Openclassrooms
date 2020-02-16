@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {{ encore_entry_link_tags('app') }}
-    {% block stylesheets %}{% endblock %}
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta name="robots" content="noindex"/>
+		<title>
+			{% block title %}
+				Welcome!
+			{% endblock %}
+		</title>
+		{{ encore_entry_link_tags('app') }}
+		{% block stylesheets %}{% endblock %}
+	</head>
 
-{% if current_menu is defined %}
-{% if current_menu == "home" %}
-{% set class = "home" %}
-{% elseif current_menu == "figure.show" %}
-{% set class = "figure-show" %}
-{% else %}
-{% set class = "" %}
-{% endif %}
-{% endif %}
+	<body class="{{ current_menu is defined ? current_menu|replace({'.': '-'}) : '' }} {{ app.user ? 'admin' : '' }}" data-spy="scroll" data-target=".header" data-offset="-50">
 
+		{% include "navbar.html.twig" %}
 
-<body class="{{ class }}" data-spy="scroll" data-target=".header" data-offset="-50">
-    {% include "navbar.html.twig" %}
-    {% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
+		{% if current_menu is defined %}
+			{% if current_menu != 'login' and current_menu != 'register' %}
+				{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
+			{% endif %}
+		{% else %}
+			{% include "header.html.twig" with {h1: block('h1'), subtitle: block('subtitle')} %}
+		{% endif %}
 
-    <section class="py-5">
-        <div class="container{% if current_menu == "home" %}-fluid{% endif %}">
-            {% block body %}{% endblock %}
-        </div>
-    </section>
+		<section id="page-body" class="py-5">
+			<div class="container{% if current_menu is defined and current_menu == 'home' %}-fluid{% endif %} "> {% block body %}{% endblock %}
+				</div>
+			</section>
 
-    {% block javascripts %}{% endblock %}
-    {{ encore_entry_script_tags('app') }}
-</body>
+			{% block javascripts %}{% endblock %}
+			{{ encore_entry_script_tags('app') }}
 
-</html>
+			{% include "footer.html.twig" %}
+
+		</body>
+	</html>

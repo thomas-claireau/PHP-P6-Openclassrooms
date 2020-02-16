@@ -1,0 +1,7 @@
+<form method="post" action="{{ path('admin.picture.delete', {'id': picture.id}) }}" onsubmit="return confirm('Vous êtes sur le point de supprimer une photo. Êtes vous vraiment sûr ?');">
+	<input type="hidden" name="_method" value="DELETE">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ picture.id) }}">
+	<button class="btn btn-link delete">
+		<i class="fa fa-trash" aria-hidden="true"></i>
+	</button>
+</form>

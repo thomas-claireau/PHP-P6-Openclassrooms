@@ -1,17 +1,30 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-	const figureShowPage = document.querySelector('body.figure-show');
+	const figureEditPage = document.querySelector('body.admin-figure-edit');
 
-	if (figureShowPage) {
-		const iframes = document.querySelectorAll('iframe');
+	if (figureEditPage) {
+		const formRemoveFigure = figureEditPage.querySelector('#removeFigure');
+		const containerActionsForm = figureEditPage.querySelector('.actions-form');
 
-		if (iframes) {
-			iframes.forEach((iframe) => {
-				iframe.addEventListener('load', () => {
-					console.log(iframe);
-					iframe.addEventListener('click', () => {
-						figureShowPage.classList.add('iframe-open');
-					});
-				});
+		const formRemoveMainImg = figureEditPage.querySelector('#removeMainImg');
+		const containerActionsMainImg = figureEditPage.querySelector('.actions');
+
+		if (formRemoveFigure && containerActionsForm) {
+			containerActionsForm.appendChild(formRemoveFigure);
+		}
+
+		if (formRemoveMainImg && containerActionsMainImg) {
+			containerActionsMainImg.append(formRemoveMainImg);
+
+			formRemoveMainImg.addEventListener('submit', (e) => {
+				const message = confirm(
+					"Vous êtes sur le point de supprimer l'image principale de la figure. Êtes vous vraiment sûr ?"
+				);
+				if (!message) {
+					e.preventDefault();
+					return;
+				}
+
+				return message;
 			});
 		}
 	}

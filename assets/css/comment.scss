@@ -1,19 +1,62 @@
-.comments {
-	.comment {
-		display: flex;
-		justify-content: flex-start;
-		align-items: center;
+.comments-container {
+  width: 50%;
+  margin: 30px auto;
 
-		.thumbnail {
-			width: 80px;
-			height: 66px;
-			border-radius: 100px;
-			background-size: cover;
-			background-position: center;
-		}
+  .comments {
+    .comment {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      grid-column-gap: 15px;
+      align-items: center;
+      margin-top: 30px;
 
-		.content {
-			text-align: left;
-		}
-	}
+      .thumbnail {
+        width: 60px;
+        height: 60px;
+        border-radius: 100px;
+        background-size: cover;
+        background-position: center;
+
+        @media screen and (max-width: $break-small) {
+          width: 45px;
+          height: 45px;
+        }
+      }
+
+      .content {
+        text-align: left;
+        border: 1px solid #cdcdcd;
+        border-radius: 3px;
+        padding: 20px;
+        font-size: 14px;
+
+        .infos {
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+
+          .author {
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: 15px;
+          }
+
+          .date {
+            font-weight: 300;
+          }
+        }
+      }
+
+      @media screen and (max-width: $break-small) {
+        grid-template-columns: 45px 1fr;
+      }
+    }
+  }
+  @media screen and (max-width: $break-large) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: $break-medium) {
+    width: 95%;
+  }
 }

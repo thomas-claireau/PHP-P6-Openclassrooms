@@ -30,32 +30,34 @@ class CommentRepository extends ServiceEntityRepository
 	/**
 	 * @return Comment[]
 	 */
-	public function findItems(int $index = 1): array
+	public function findItems(int $index = 1, $idFigure): array
 	{
-		return $this->getQueryDesc($index)
+		return $this->getQueryDesc($index, $idFigure)
 			->getQuery()
 			->getResult();
 	}
 
-	public function findMoreItems(int $index): array
+	public function findMoreItems(int $index, $idFigure): array
 	{
 		if ($index !== 1) {
-			return $this->getQueryDesc($index)
+			return $this->getQueryDesc($index, $idFigure)
 				->getQuery()
 				->getResult(Query::HYDRATE_ARRAY);
 		}
 	}
 
-	public function countAll()
+	public function countAll($idFigure)
 	{
 		return intval($this->createQueryBuilder('p')
 			->select('COUNT(p)')
+			->where('p.figure = :id_figure')
+			->setParameter('id_figure', $idFigure)
 			->getQuery()->getSingleScalarResult());
 	}
 
-	private function getQueryDesc(int $index)
+	private function getQueryDesc(int $index, $idFigure)
 	{
-		$total = $this->countAll();
+		$total = $this->countAll($idFigure);
 		$nbResultsPerPage = 10;
 
 
@@ -66,6 +68,8 @@ class CommentRepository extends ServiceEntityRepository
 		if (!$total || !$nbGroups) {
 			return $this->createQueryBuilder('p')
 				->orderBy('p.created_at', 'DESC')
+				->where('p.figure = :id_figure')
+				->setParameter('id_figure', $idFigure)
 				->setMaxResults($nbResultsPerPage);
 		}
 
@@ -81,6 +85,8 @@ class CommentRepository extends ServiceEntityRepository
 
 		return $this->createQueryBuilder('p')
 			->orderBy('p.created_at', 'DESC')
+			->where('p.figure = :id_figure')
+			->setParameter('id_figure', $idFigure)
 			->setFirstResult($interval['start'])
 			->setMaxResults($nbResultsPerPage);
 	}

@@ -1,23 +1,38 @@
 {{ form_start(form) }}
 
 <div class="actions">
-	<button class="btn btn-link edit">
-		<i class="fa fa-file-image-o" aria-hidden="true"></i>
-	</button>
-	<button class="btn btn-link delete">
-		<i class="fa fa-trash" aria-hidden="true"></i>
-	</button>
+	<div class="figure_mainImgFile">
+		<label for="figure_mainImgFile">
+			<i class="fa fa-file-image-o" aria-hidden="true"></i>
+		</label>
+		{{ form_row(form.mainImgFile) }}
+	</div>
 </div>
 
-<div class="image" style="background-image: url({{ asset('build/images/empty.jpg') }});">
+{% if figure.pictures|length > 0 and (figure.mainImage is null or figure.mainImage is empty) %}
+	{% if 'image-' in figure.pictures|last.filename %}
+		{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
+	{% else %}
+		{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+	{% endif %}
+{% elseif (figure.mainImage is not null) %}
+	{% if 'image-' in figure.mainImage %}
+		{% set mainImage = asset('build/images/' ~ figure.mainImage) %}
+	{% else %}
+		{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('large') %}
+	{% endif %}
+{% elseif figure.mainImage is null and 'image-' in figure.pictures|last.filename %}
+	{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
+{% endif %}
+
+<div class="image" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
 	<h1>
-		Créer une nouvelle figure ci-dessous
+		{{figure.name}}
 	</h1>
 </div>
-
 <div class="container mt-4 form-container">
 	<div class="row">
-		<div class="col">
+		<div class="col-md-12">
 			{{ form_row(form.pictureFiles) }}
 		</div>
 	</div>

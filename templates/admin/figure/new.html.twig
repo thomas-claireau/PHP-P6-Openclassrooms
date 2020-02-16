@@ -6,6 +6,6 @@
 
 {% block body %}
 	<div class="figure-container col text-center container">
-		{{ include('admin/figure/_form_new.html.twig', {button: 'Créer'}) }}
+		{{ include('admin/figure/_form_new.html.twig', {button: 'Créer', 'idFigure': idFigure}) }}
 	</div>
 {% endblock %}

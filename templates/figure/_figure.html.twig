@@ -1,8 +1,18 @@
 <a href="{{ path('figure.show', { id: figure.id, slug: figure.slug }) }}" class="card mt-4 figure">
 	{% if figure.pictures|length > 0 and (figure.mainImage is null or figure.mainImage is empty) %}
-		{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
-	{% elseif (figure.mainImage is not null) %}
-		{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('thumb') %}
+		{% if 'image-' in figure.pictures|last.filename %}
+			{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
+		{% else %}
+			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') %}
+		{% endif %}
+	{% elseif figure.mainImage is not null %}
+		{% if 'image-' in figure.mainImage %}
+			{% set mainImage = asset('build/images/' ~ figure.mainImage) %}
+		{% else %}
+			{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('thumb') %}
+		{% endif %}
+	{% elseif figure.mainImage is null and 'image-' in figure.pictures|last.filename %}
+		{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
 	{% endif %}
 
 	<div class="card-img-top" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }})"></div>

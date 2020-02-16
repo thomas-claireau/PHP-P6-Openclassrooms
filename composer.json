@@ -1,6 +1,6 @@
 {
-	"name": "thomas-claireau/developpez-le-site-communautaire-snowtricks",
-	"version": "0.9.0",
+	"name": "thomas-claireau/snowtricks",
+	"version": "1.0.0",
 	"description": "package manager for my project",
 	"type": "project",
 	"keywords": [
@@ -19,6 +19,7 @@
 			"role": "Fullstack web developer"
 		}
 	],
+	"minimum-stability": "dev",
 	"require": {
 		"php": "^7.1.3",
 		"ext-ctype": "*",
@@ -28,13 +29,16 @@
 		"knplabs/knp-paginator-bundle": "4.1.1",
 		"liip/imagine-bundle": "2.0.0",
 		"sensio/framework-extra-bundle": "^5.1",
+		"symfony/apache-pack": "dev-master",
 		"symfony/asset": "4.2.*",
+		"symfony/cache": "4.2.12",
 		"symfony/console": "4.2.*",
 		"symfony/dotenv": "4.2.*",
 		"symfony/expression-language": "4.2.*",
 		"symfony/flex": "^1.3.1",
 		"symfony/form": "4.2.*",
 		"symfony/framework-bundle": "4.2.*",
+		"symfony/http-foundation": "4.2.12",
 		"symfony/monolog-bundle": "^3.1",
 		"symfony/orm-pack": "*",
 		"symfony/process": "4.2.*",
@@ -48,8 +52,8 @@
 		"symfony/webpack-encore-bundle": "^1.7",
 		"symfony/yaml": "4.2.*",
 		"vich/uploader-bundle": "1.11.0",
-		"symfony/http-foundation": "4.2.12",
-		"symfony/cache": "4.2.12"
+		"doctrine/doctrine-migrations-bundle": "^2.0",
+		"doctrine/migrations": "2.1"
 	},
 	"require-dev": {
 		"doctrine/doctrine-fixtures-bundle": "3.0.2",

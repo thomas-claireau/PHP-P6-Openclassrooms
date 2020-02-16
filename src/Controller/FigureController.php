@@ -46,8 +46,8 @@ class FigureController extends AbstractController
 	public function show(Figures $figure, string $slug, Request $request): Response
 	{
 		$user = $this->getUser();
-		$comments = $this->commentRepository->findItems();
-		$nbGroups = round($this->commentRepository->countAll() / 10);
+		$comments = $this->commentRepository->findItems(1, $figure->getId());
+		$nbGroups = round($this->commentRepository->countAll($figure->getId()) / 10);
 
 		if ($user) {
 			$comment = new Comment();
@@ -102,10 +102,11 @@ class FigureController extends AbstractController
 	{
 		$params = $request->attributes->get('_route_params');
 		$index = (int) $params['index'];
-		$nbGroups = round($this->commentRepository->countAll() / 10);
+		$idFigure = $params['id'];
+		$nbGroups = round($this->commentRepository->countAll($idFigure) / 10);
 
 		if (is_int($index) && $index > 1) {
-			$moreComments = (array) $this->commentRepository->findMoreItems($index);
+			$moreComments = (array) $this->commentRepository->findMoreItems($index, $idFigure);
 			$htmlData = [];
 
 			if ($moreComments) {

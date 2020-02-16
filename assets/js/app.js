@@ -48,3 +48,16 @@ $('.scroll').on('click', function(event) {
 $(document).ready(function() {
 	$('select').select2();
 });
+
+document.onreadystatechange = function() {
+	if (document.readyState == 'complete') {
+		// ===== FOOTER TOUJOURS EN BAS DE L'ECRAN ===== //
+		const footer = document.querySelector('footer');
+
+		if (footer) {
+			var heightFooter = document.querySelector('footer').offsetHeight;
+			var contentPage = document.querySelector('#page-body');
+			contentPage.style.minHeight = 'calc(100vh - ' + heightFooter + 'px)';
+		}
+	}
+};

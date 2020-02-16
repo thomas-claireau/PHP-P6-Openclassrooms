@@ -23,9 +23,19 @@
 		{% endif %}
 
 		{% if figure.pictures|length > 0 and (figure.mainImage is null or figure.mainImage is empty) %}
-			{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') | imagine_filter('large') %}
+			{% if 'image-' in figure.pictures|last.filename %}
+				{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
+			{% else %}
+				{% set mainImage = vich_uploader_asset(figure.pictures|last, 'imageFile') | imagine_filter('large') %}
+			{% endif %}
 		{% elseif (figure.mainImage is not null) %}
-			{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('large') %}
+			{% if 'image-' in figure.mainImage %}
+				{% set mainImage = asset('build/images/' ~ figure.mainImage) %}
+			{% else %}
+				{% set mainImage = vich_uploader_asset(figure, 'mainImgFile') | imagine_filter('large') %}
+			{% endif %}
+		{% elseif 'image-' in figure.pictures|last.filename %}
+			{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
 		{% endif %}
 
 		<div class="image" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }});">
@@ -40,7 +50,12 @@
 			<div class="medias">
 				<div class="photos">
 					{% for picture in figure.pictures %}
-						<div class="photo miniature" style="background-image: url({{ vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') }})"></div>
+						{% if 'image-' in picture.filename %}
+							{% set url = asset('build/images/' ~ picture.filename) %}
+						{% else %}
+							{% set url = vich_uploader_asset(picture, 'imageFile') | imagine_filter('thumb') %}
+						{% endif %}
+						<div class="photo miniature" style="background-image: url({{ url }})"></div>
 					{% endfor %}
 				</div>
 				<div class="videos">
@@ -80,7 +95,7 @@
 				</div>
 			{% endif %}
 		</div>
-		<div class="comments-container">
+		<div class="comments-container {{ comments|length == 0 ? 'hide' : ''}}">
 			<h2>
 				Commentaires
 			</h2>

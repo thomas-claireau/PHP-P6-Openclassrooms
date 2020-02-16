@@ -128,8 +128,8 @@ class FigureController extends AbstractController
 			return new JsonResponse([
 				'html' => $htmlData,
 			], 200);
-		} else {
-			return new JsonResponse(['error' => 'Une erreur est survenue'], 400);
 		}
+
+		return new JsonResponse(['error' => 'Une erreur est survenue'], 400);
 	}
 }

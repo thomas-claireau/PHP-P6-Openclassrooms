@@ -49,10 +49,10 @@ class UserValidate extends AbstractController
 			$this->addFlash('success', 'Inscription confirmée');
 
 			return $this->redirectToRoute('home');
-		} else {
-			$this->addFlash('error', 'Inscription non confirmée, un problème est survenu');
-			return $this->redirectToRoute('home');
 		}
+
+		$this->addFlash('error', 'Inscription non confirmée, un problème est survenu');
+		return $this->redirectToRoute('home');
 	}
 
 	/**
@@ -85,9 +85,9 @@ class UserValidate extends AbstractController
 				'current_menu' => 'register',
 				'form' => $form->createView(),
 			]);
-		} else {
-			$this->addFlash('error', 'Le lien de réinitialisation du mot de passe a expiré, veuillez recommencer');
-			return $this->redirectToRoute('home');
 		}
+
+		$this->addFlash('error', 'Le lien de réinitialisation du mot de passe a expiré, veuillez recommencer');
+		return $this->redirectToRoute('home');
 	}
 }

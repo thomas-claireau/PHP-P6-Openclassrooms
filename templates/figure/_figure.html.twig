@@ -15,10 +15,6 @@
 		{% set mainImage = asset('build/images/' ~ figure.pictures|last.filename) %}
 	{% endif %}
 
-	<pre>
-		{{ dump(mainImage) }}
-	</pre>
-
 	<div class="card-img-top" style="background-image: url({{ mainImage is defined and mainImage is not empty ? mainImage : asset('build/images/empty.jpg') }})"></div>
 	<div class="card-body">
 		<h5 class="card-title">

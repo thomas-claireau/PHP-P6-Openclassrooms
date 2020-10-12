@@ -4,8 +4,6 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/56882df21a146f2e28bf/maintainability)](https://codeclimate.com/github/thomas-claireau/PHP-P6-Openclassrooms/maintainability)
 
-Démo du projet, [c'est par ici 👋](http://snowtricks.thomas-claireau.fr/)
-
 ## Installation du projet
 
 Via Composer :

@@ -94,4 +94,43 @@ En premier lieu il vous faudra écrire l’ensemble des issues/tickets afin de d
 
 L’ensemble des figures de snowboard doivent être présentes à l’initialisation de l’application web. Vous utiliserez un bundle externe pour charger ces données.
 
-## ⌛ Projet en cours...
+## ✔️ Projet validé
+
+Commentaire de l'évaluateur :
+
+1. Évaluation globale du travail réalisé par l’étudiant (en spécifiant les critères non-validés si le projet est à retravailler) :
+
+Thomas a produit des livrables vraiment de top qualité. Le code est propre, bien commenté, les fonctionnalités attendues sont là et quelques extras sont appréciables.
+
+Au niveau de la présentation orale, les temps dédiés à chaque partie n'ont pas été respectés. Thomas a consacré beaucoup trop de temps à la démonstration, ce qui fait que des points comme l'estimation des tâches ou l'exécution des tests unitaires ont été vus dans les Q/R alors qu'ils auraient du faire partie de la présentation initiale.
+
+2. Évaluation des livrables selon les critères du projet :
+
+Les livrables sont au top. On a une bonne gestion des modèles, des controllers, et des repository. Toutes les fonctionnalités de Symfony sont utilisées avec justesse et pertinence.
+
+La partie Git est bien fournie, et cet outil de versioning est très bien utilisé.
+
+On regrettera que les tests unitaires soient là "parce qu'il en faut" plutôt qu'avoir de vrais tests unitaires pertinents.
+
+3. Évaluation de la présentation orale et sa conformité aux attentes :
+
+Thomas a passé trop de temps a faire la démonstration de l'application, entrant dans des détails non nécessaires (oubli de mot de passe, ...). Ceci lui a porté préjudice sur les deux autres parties qui n'ont pas été traitées de manière exhaustive.
+
+Toutefois, ces points ont été abordés lors des Q/R, et Thomas a à chaque fois apporté des réponses pertinentes.
+
+4. Évaluation des nouvelles compétences acquises par l'étudiant :
+
+Symfony
+Doctrine
+Codacy
+Tests unitaires
+5. Points positifs (au moins 1) :
+
+Utilisation vraiment poussée des fonctionnalités de GitHub
+Code très propre et bien documenté
+Séparation des différentes parties du code en utilisant des Repository
+Bonne gestion d'Ajax
+6. Axes d'amélioration (au moins 1) :
+
+Tests unitaires pas très pertinents
+Temps dédié à chaque partie de la présentation non respecté

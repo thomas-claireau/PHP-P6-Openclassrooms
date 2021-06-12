@@ -1,4 +1,4 @@
-# [PHP] - P6 Openclassrooms - Développez de A à Z le site communautaire SnowTricks
+# [PHP / Symfony] - Développement du site communautaire SnowTricks
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/38908a1ea0204cd39996400db31ba8eb)](https://www.codacy.com/manual/thomas-claireau/PHP-P6-Openclassrooms?utm_source=github.com&utm_medium=referral&utm_content=thomas-claireau/PHP-P6-Openclassrooms&utm_campaign=Badge_Grade)
 
